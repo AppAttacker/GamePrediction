@@ -1,0 +1,49 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container-fluid main-content bgimage">
+  <div class="row">
+    <div class="col-lg-3 col-sm-3 text-center">
+      <div class="jumbotronProfile">
+        <img src="../assets/emptyprofile.png">
+        <div>Hello..</div>
+      </div>
+    </div>
+    <div class="col-lg-9 col-sm-9">
+      <div class="jumbotronHeader text-center" style="margin-bottom:2">
+        <h1>Game Prediction.. </h1>
+        <p>Lets play with your knowledge..!</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-sm-3">
+      <div class="menucontent">
+        <app-match-schedule></app-match-schedule>
+      </div>
+    </div>
+    <div class="row col-lg-9 col-sm-9 main-content-part1">
+      <div *ngIf="admin=='admin_1'" class="col-lg-12 col-sm-12">
+        <div class="quickaccess"></div>
+      </div>
+      <div class="row col-lg-12 col-sm-12 main-content-part1">
+        <div class="col-lg-9 col-sm-9">
+          <div class="qacontent">
+              <app-user-template></app-user-template>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-3">
+          <div class="leaderboardcontent">
+            LeaderBoard<hr>
+            <app-leader-board></app-leader-board>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 text-center">
+      <div class="footercontent">by App Attacker</div>
+    </div>
+  </div>
+</div>
+
+<!-- <router-outlet></router-outlet> -->

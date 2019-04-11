@@ -1,0 +1,43 @@
+<div class="container">
+    <!-- Nav pills -->
+    <ul class="nav nav-pills" role="tablist" style="margin-bottom: 10px">
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#played">RECENT</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="pill" href="#ongoing">ONGOING</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#upcoming">UPCOMING</a>
+      </li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div id="played" class="container tab-pane fade scrollapply"><br>
+        <div *ngIf="matchList && matchList.length > 0; else emptyPage"></div>
+        <div #matchPage *ngFor="let match of matchList" >
+          <app-match-details [matchDetails]="match"></app-match-details>
+          <hr>
+        </div>
+      </div>
+      <div id="ongoing" class="container tab-pane active scrollapply"><br>
+        <div *ngIf="matchList && matchList.length > 0; else emptyPage"></div>
+        <div #matchPage *ngFor="let match of matchList" >
+          <app-match-details [matchDetails]="match"></app-match-details>
+          <hr>
+        </div>
+        
+      </div>
+      <div id="upcoming" class="container tab-pane fade scrollapply"><br>
+        <div *ngIf="matchList && matchList.length > 0; else emptyPage"></div>
+        <div #matchPage *ngFor="let match of matchList" >
+          <app-match-details [matchDetails]="match"></app-match-details>
+          <hr>
+        </div>
+      </div>
+      <ng-template #emptyPage >
+        No Data Exist...
+      </ng-template>
+      
+    </div>
+  </div>
