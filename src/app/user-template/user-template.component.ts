@@ -16,7 +16,7 @@ export class UserTemplateComponent implements OnInit {
       animationEnabled: true,
       exportEnabled: false,
       title: {
-        text: "Your score gained so far..."
+        text: ""
       },
       backgroundColor: "white",
       data: [{

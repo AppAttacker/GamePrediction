@@ -10,6 +10,7 @@ import { MatchDetailsComponent } from './match-details/match-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserTemplateComponent } from './user-template/user-template.component';
 import { LeaderBoardComponent } from './leader-board/leader-board.component';
+import { QuestionaryComponent } from './questionary/questionary.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LeaderBoardComponent } from './leader-board/leader-board.component';
     MatchScheduleComponent,
     MatchDetailsComponent,
     UserTemplateComponent,
-    LeaderBoardComponent
+    LeaderBoardComponent,
+    QuestionaryComponent
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,7 @@ export class MatchDetailsComponent implements OnInit {
   ngOnInit() {
   }
 
-  goTOQuestionPaper(){
+  triggerQuestSection(){
     alert("test");
   }
 

@@ -30,6 +30,7 @@ body {
   background-color: #3f7df0;
   color: white;
   border-radius: .3rem;
+ 
 }
 .jumbotronProfile[_ngcontent-c0] {
   padding: 1rem 0rem;
@@ -81,24 +82,27 @@ img {
   margin: 0px 0px 5px 0px;
   
   /* height: 20%; */
-  background: #85ddd1;
+  background: #859ddd;
   border-radius: .3rem;
 }
+
 .qacontent {
   /* min-height: 100%; */
   /* margin-top: 2px; */
+  margin: 0px;
   min-height: calc(88vh - 123px);
   height: 100%;
-  background: #ab8bf5;
+  background: #78dae9;
   border-radius: .3rem;
 }
 
 .leaderboardcontent {
   /* min-height: 100%; */
   /* margin-top: 2px; */
+  margin: 0px;
   min-height: calc(88vh - 123px);
   height: 100%;
-  background: #f1ea7a;
+  background: #db62eb;
   border-radius: .3rem;
   
 }
@@ -107,7 +111,7 @@ img {
   height: 100%;
   background: #c5dd6e;
   border-radius: .3rem;
-  
+  text-align: center;
 }
 .matchcontent {
   min-height: 50px;
@@ -122,12 +126,12 @@ img {
   margin-top: 5px;
   margin-bottom: 10px;
   height: 25px;
-  background: #dddbdf;
+  background: #ece4e2;
   border-radius: .3rem;
 }
 .scrollapply {
   min-height: calc(80vh - 123px);
-  height: 500px;
+  height: 510px;
   overflow-y: scroll;
 }
 ::-webkit-scrollbar {
@@ -142,3 +146,40 @@ a:hover, a:visited, a:link, a:active
 .userInfo{
   padding: 5% 0% 0% 5%;
 }
+.center { 
+  margin: 0;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.carousel-item {
+  height: 300px;
+  
+}
+.carousel-inner {
+  margin-bottom:50px;
+  height: 60%;
+}
+.carousel {
+  padding-top: 5%;
+  height: 10%;
+}
+
+.carousel-control-prev-icon {
+  /* background-image: url(../images/previous-32.png); */
+  width: 32px;
+  height: 32px;
+}
+.carousel-control-next-icon {
+  /* background-image: url(../images/next-32.png); */
+  width: 32px;
+  height: 32px;
+}
+.carousel-indicators li {
+  width: 20px;
+  height: 20px;
+  border-radius: 10%;
+}
+
