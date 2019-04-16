@@ -3,4 +3,7 @@ export interface IMatchDetails {
     description: string;
     eventStatus: string;
     startDate: string;
+    from: string;
+    to: string;
+    id: number;
 }

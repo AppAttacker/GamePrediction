@@ -1,19 +1,23 @@
-<div class="container">
+<div class="container-fluid" style="height: calc(97.5vh - 123px); border-radius: .5rem; background-color: rgb(196, 198, 202);">
     <!-- Nav pills -->
-    <ul class="nav nav-pills" role="tablist" style="font-weight: normal; margin-bottom: 5px;">
+    <ul class="nav nav-pills justify-content-center px-0" role="tablist" style="border-radius: .3rem; background-color: rgb(212, 240, 110);">
       <li class="nav-item">
-        <a class="nav-link" data-toggle="pill" href="#played">RECENT</a>
+        <a class="nav-link px-2" data-toggle="pill" href="#played">RECENT</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" data-toggle="pill" href="#ongoing">ONGOING</a>
+        <a class="nav-link px-2 active" data-toggle="pill" href="#ongoing">ONGOING</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="pill" href="#upcoming">UPCOMING</a>
+        <a class="nav-link px-2" style="padding-right: 0px;" data-toggle="pill" href="#upcoming">UPCOMING</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link px-1" href="#" ><img src="../../assets/refresh1.png" style="padding-left: 5px; padding-top: 0px;border-radius: 50%;" (click)="updateMatchList()"></a>
       </li>
     </ul>
+    
     <!-- Tab panes -->
-    <div class="tab-content">
-      <div id="played" class="container tab-pane fade scrollapply"><br>
+    <div class="tab-content" style="margin-top: 5px; ">
+      <div id="played" class="container tab-pane scrollapply"><br>
         <div *ngIf="matchList && matchList.length > 0; else emptyPage"></div>
         <div #matchPage *ngFor="let match of matchList" >
           <app-match-details [matchDetails]="match"></app-match-details>
@@ -28,13 +32,20 @@
         </div>
         
       </div>
-      <div id="upcoming" class="container tab-pane fade scrollapply"><br>
+      <div id="upcoming" class="container tab-pane scrollapply"><br>
         <div *ngIf="matchList && matchList.length > 0; else emptyPage"></div>
         <div #matchPage *ngFor="let match of matchList" >
           <app-match-details [matchDetails]="match"></app-match-details>
           <hr>
         </div>
       </div>
+      <!-- <div id="search" class="container tab-pane scrollapply"><br>
+        <div *ngIf="matchList && matchList.length > 0; else emptyPage"></div>
+        <div #matchPage *ngFor="let match of matchList" >
+          <app-match-details [matchDetails]="match"></app-match-details>
+          <hr>
+        </div>
+      </div> -->
       <ng-template #emptyPage >
         No Data Exist...
       </ng-template>

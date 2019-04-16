@@ -1,8 +1,18 @@
-<div class="container matchcontent">
-  Match Details
-  <hr>
-    <div>{{matchDetails.name}}</div>
-    <div>Start at {{matchDetails.startDate}}</div>
-    <hr>
-    <button type="button" class="btn btn-dark btn-sm" (click)="triggerQuestSection()">START PREDICTION</button>
+<div class="card text-white bg-dark" style="text-align: center;">
+  <div class="card-body" style="padding-top: 8px; padding-left: 5px; padding-right: 5px;">
+    <h6 class="card-title">Match Details</h6>
+    <div class="container-fluid" style="color: rgb(240, 238, 167);">
+      <hr>
+        <div >
+          <img class="" src='../../assets/flags/{{matchDetails.from}}.png'>
+          {{matchDetails.name}} 
+          <img class="" src='../../assets/flags/{{matchDetails.to}}.png'>
+        </div>
+        <div>Start at {{matchDetails.startDate}}</div>
+        <!-- <span><time end-time="{{endTime}}">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</time></span> -->
+        <hr>
+        <a class="btn btn-success btn-sm" [routerLink]="['/predictionPage', matchDetails.id]" role="button">START PREDICTION</a>
+        <!-- <button type="button" class="btn  btn-success btn-sm" (click)="openModal()">START PREDICTION</button> -->
+     </div>
+  </div>
 </div>

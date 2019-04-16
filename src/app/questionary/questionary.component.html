@@ -1,49 +1,49 @@
-<div class="card" style="background-color: #78dae9">
-  <div class="card-body">
-    <h5 class="card-title">Give your prediction here</h5>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12 p-0">
-          <div class="jumbotron min-vh-100 text-center m-0 bg-info d-flex flex-column justify-content-center">
-            <div id="questionSection" class="carousel slide" data-ride="carousel" data-interval="false"
-              data-keyboard="true">
+<div class="card"style="height: calc(97.5vh - 123px); background-color: rgb(196, 198, 202);">
+    <div class="card-body">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h5 class="card-title">Give your prediction here</h5>
+            </div>
+            <div>
+                <h6><a [routerLink]="['']">User Status</a></h6>
+            </div>
+       </div>
+      
+      <div id="demo" class="carousel bg-dark" style="height: calc(80vh - 123px); color: rgb(240, 238, 167); text-align: center;" data-ride="carousel">
 
-              <!-- The slideshow -->
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <div>
-                    Who is the highest run taker?
-                  </div>
-                  <div>
-                    Who is the highest run taker?
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  who will take maximum wicket?
-                </div>
-                <div class="carousel-item">
-                  Who will be man of the match award winner?
-                </div>
-              </div>
-
-              <!-- Left and right controls -->
-              <a class="carousel-control-prev" href="#questionSection" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-              </a>
-              <a class="carousel-control-next" href="#questionSection" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
-              </a>
-
-              <!-- Indicators -->
-              <ul class="carousel-indicators">
-                <li data-target="#questionSection" data-slide-to="0" class="active"></li>
-                <li data-target="#questionSection" data-slide-to="1"></li>
-                <li data-target="#questionSection" data-slide-to="2"></li>
-              </ul>
+          <!-- Indicators -->
+          <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+          </ul>
+        
+          <!-- The slideshow -->
+          <div class="carousel-inner vertical-center">
+            <div class="carousel-item active">
+              <!-- <img src="../../assets/images2.jpg" alt="Los Angeles"> -->hello...{{id}}
+            </div>
+            <div class="carousel-item">
+              <!-- <img src="../../assets/images3.jpg" alt="Chicago"> -->Hi...{{id}}
+            </div>
+            <div class="carousel-item">
+              <!-- <img src="../../assets/images4.jpg" alt="New York"> -->Hey...{{id}}
             </div>
           </div>
+        
+          <!-- Left and right controls -->
+          <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
+        
         </div>
-      </div>
+        <div class="btn-lg" style="text-align: right">
+            <button type="button" class="btn btn-ghost-secondary">Close</button>
+            <button type="button" class="btn btn-pill btn-warning">Save changes</button>
+            <button type="submit" class="btn btn-pill btn-primary">Submit changes</button>
+          </div>
     </div>
   </div>
-</div>

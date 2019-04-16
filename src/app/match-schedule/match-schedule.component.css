@@ -1,0 +1,16 @@
+.scrollapply {
+    height: calc(87vh - 123px);
+    /* height: 100%; */
+    overflow-y: scroll;
+  }
+  .tab-content>.tab-pane {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+.nav {
+  flex-wrap: nowrap;
+  text-align: center;
+}
+img {
+  border-radius: 50%;
+}

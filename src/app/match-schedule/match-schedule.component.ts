@@ -11,10 +11,12 @@ export class MatchScheduleComponent implements OnInit {
 
   constructor(private matchService: MatchService) { }
 
-  matchDetails: IMatchDetails={name: "England vs South Africa (ICC Cricket World Cup 2019)",
+  matchDetails: IMatchDetails={id: 1, name: "England vs South Africa (ICC Cricket World Cup 2019)",
                               description: "Next Match",
                               eventStatus: "Upcoming",
-                              startDate: "05/30/2019 09:30:00 AM"};
+                              startDate: "05/30/2019 09:30:00 AM",
+                              from: "ind",
+                              to: "pak"};
   matchList: IMatchDetails[];
 
   ngOnInit() {
@@ -28,6 +30,9 @@ export class MatchScheduleComponent implements OnInit {
     return this.matchService.getMatchScheduleList().subscribe(
         matchObj => this.matchList = matchObj
     );
+  }
+  updateMatchList(){
+    alert("list updated..");
   }
 
 }

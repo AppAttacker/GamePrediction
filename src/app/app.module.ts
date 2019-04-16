@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserTemplateComponent } from './user-template/user-template.component';
 import { LeaderBoardComponent } from './leader-board/leader-board.component';
 import { QuestionaryComponent } from './questionary/questionary.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,11 @@ import { QuestionaryComponent } from './questionary/questionary.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      {path: '', component: UserTemplateComponent},
+      {path: 'predictionPage/:id', component: QuestionaryComponent},
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

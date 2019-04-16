@@ -11,5 +11,9 @@ export class LeaderBoardComponent implements OnInit {
 
   ngOnInit() {
   }
+  
+  updateMatchList(){
+    alert("list updated..");
+  }
 
 }
