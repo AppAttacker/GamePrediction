@@ -30,6 +30,7 @@ import { RouterModule } from '@angular/router';
       {path: '', component: UserTemplateComponent},
       {path: 'predictionPage/:id', component: QuestionaryComponent},
     ])
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
