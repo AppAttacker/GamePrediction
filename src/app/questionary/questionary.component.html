@@ -1,49 +1,98 @@
-<div class="card"style="height: calc(97.5vh - 123px); background-color: rgb(196, 198, 202);">
+<form (ngSubmit)="onSubmit()" #studentForm="ngForm">
+  <div class="card" style="height: calc(97.5vh - 123px); background-color: rgb(196, 198, 202);">
     <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h5 class="card-title">Give your prediction here</h5>
+        </div>
+        <div>
+          <h6><a [routerLink]="['']">User Status</a></h6>
+        </div>
+      </div>
+
+      <div id="demo" class="carousel slide bg-dark"
+        style="height: calc(80vh - 123px); color: rgb(240, 238, 167); text-align: center; border-radius: .5rem;"
+        data-ride="carousel" data-interval="false">
+        <div style="text-align: left">match id: {{id}}
         <div class="d-flex justify-content-between">
             <div>
-                <h5 class="card-title">Give your prediction here</h5>
+              
             </div>
             <div>
-                <h6><a [routerLink]="['']">User Status</a></h6>
-            </div>
-       </div>
-      
-      <div id="demo" class="carousel bg-dark" style="height: calc(80vh - 123px); color: rgb(240, 238, 167); text-align: center;" data-ride="carousel">
-
-          <!-- Indicators -->
-          <ul class="carousel-indicators">
-            <li data-target="#demo" data-slide-to="0" class="active"></li>
-            <li data-target="#demo" data-slide-to="1"></li>
-            <li data-target="#demo" data-slide-to="2"></li>
-          </ul>
-        
-          <!-- The slideshow -->
-          <div class="carousel-inner vertical-center">
-            <div class="carousel-item active">
-              <!-- <img src="../../assets/images2.jpg" alt="Los Angeles"> -->hello...{{id}}
-            </div>
-            <div class="carousel-item">
-              <!-- <img src="../../assets/images3.jpg" alt="Chicago"> -->Hi...{{id}}
-            </div>
-            <div class="carousel-item">
-              <!-- <img src="../../assets/images4.jpg" alt="New York"> -->Hey...{{id}}
+              
             </div>
           </div>
-        
-          <!-- Left and right controls -->
-          <a class="carousel-control-prev" href="#demo" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-          </a>
-          <a class="carousel-control-next" href="#demo" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-          </a>
-        
         </div>
-        <div class="btn-lg" style="text-align: right">
-            <button type="button" class="btn btn-ghost-secondary">Close</button>
-            <button type="button" class="btn btn-pill btn-warning">Save changes</button>
-            <button type="submit" class="btn btn-pill btn-primary">Submit changes</button>
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+          <li *ngFor="let question of questionList;  first as isFirst; index as i;"
+            [className]="isFirst ? 'active' : ''" data-target="#demo" data-slide-to="i"></li>
+        </ul>
+
+        <!-- The slideshow -->
+        <div class="container h-100">
+          <div class="row align-items-center h-100">
+            
+            <div class="col-11">
+              <div class="carousel-inner">
+
+                <div *ngFor="let question of questionList; first as isFirst; last as isLast; index as i;"
+                  [className]="isFirst ? 'carousel-item active' : 'carousel-item'">
+                  <!-- <img src="../../assets/images2.jpg" alt="Los Angeles"> -->
+
+                  <h5><label>{{i+1}}. {{question.descript}}</label></h5><br><br><br>
+                  <div *ngIf="isFirst || isLast" style="text-align: center">
+                    <!-- <input type="text" [(ngModel)]="question.answer" [name]='question.descript' /> -->
+                    <span style="padding-right: 20px; padding-bottom: 100px;">
+                      <select class="browser-default custom-select" id="winOption" aria-placeholder="Run or Wicket" style="padding-left: 10px;height: 35px; ;width: 20%">
+                        <option value="R">Run</option>
+                        <option value="W">Wicket</option>
+                      </select>
+                    </span>
+                    <input [name]='question.descript' type="range" min="0" max="500" [(ngModel)]="question.answer">
+                    <span style="padding-left: 20px; padding-bottom: 100px; vertical-align: top">
+                      <input type="text" class="form-control-sm" [(ngModel)]="question.answer" [name]='question.descript' style="padding-left: 10px;height: 35px; ;width: 10%">
+                    </span>
+                  </div>
+                  <div *ngIf="!(isFirst || isLast)">
+                    <input type="text" list="staticUserIds" [name]='question.descript' [(ngModel)]="question.answer" />
+                    <datalist class="ui-datalist-data" id="staticUserIds">
+                      <option>1000</option>
+                      <option>1100</option>
+                      <option>1110</option>
+                      <option>1200</option>
+                      <option>1220</option>
+                      <option>1340</option>
+                      <option>1567</option>
+                      <option>1678</option>
+                      <option>1799</option>
+                      <option>1989</option>
+                      <option>1779</option>
+                      <option>1787</option>
+                      <option>1759</option>
+                    </datalist>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+
+      </div>
+      <div class="btn-sm" style="text-align: right">
+        <button type="button" class="btn btn-ghost-secondary">Close</button>
+        <button type="button" class="btn btn-pill btn-warning">Save changes</button>
+        <button type="submit" class="btn btn-pill btn-primary">Submit changes</button>
+      </div>
     </div>
   </div>
+</form>

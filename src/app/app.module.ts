@@ -12,6 +12,8 @@ import { UserTemplateComponent } from './user-template/user-template.component';
 import { LeaderBoardComponent } from './leader-board/leader-board.component';
 import { QuestionaryComponent } from './questionary/questionary.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,14 @@ import { RouterModule } from '@angular/router';
     MatchDetailsComponent,
     UserTemplateComponent,
     LeaderBoardComponent,
-    QuestionaryComponent
+    QuestionaryComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot([
       {path: '', component: UserTemplateComponent},
       {path: 'predictionPage/:id', component: QuestionaryComponent},
