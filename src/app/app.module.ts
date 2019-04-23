@@ -14,6 +14,7 @@ import { QuestionaryComponent } from './questionary/questionary.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -23,17 +24,21 @@ import { LoginComponent } from './login/login.component';
     UserTemplateComponent,
     LeaderBoardComponent,
     QuestionaryComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      {path: '', component: UserTemplateComponent},
-      {path: 'predictionPage/:id', component: QuestionaryComponent},
-    ])
+    RouterModule
+    // RouterModule.forRoot([
+    //   {path: '', component: UserTemplateComponent},
+    //   {path: 'predictionPage/:id', component: QuestionaryComponent},
+    //   {path: 'wcpredict/login', component: LoginComponent},
+    //   {path: 'wcpredict/dashboard', component: DashboardComponent}
+    // ])
     
   ],
   providers: [],

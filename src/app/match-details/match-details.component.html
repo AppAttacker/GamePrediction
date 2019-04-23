@@ -11,7 +11,7 @@
         <div style="padding-top: 10px;">Start at {{matchDetails.startDate}}</div>
         <div style="padding-top: 10px; color: rgb(103, 200, 212); font-size: medium; font-weight:bold ">{{remTimer}}</div>
         <hr>
-        <a class="btn btn-success btn-sm" [class.disabled]="remainDays>2 ? true: false" [routerLink]="['/predictionPage', matchDetails.id]" role="button">START PREDICTION</a>
+        <a class="btn btn-success btn-sm" [class.disabled]="remainDays>2 ? true: false" [routerLink]=" ['/wcpredict/dashboard', { outlets: { 'dashboard': ['predictionPage', matchDetails.id] } }]" role="button">START PREDICTION</a>
         <!-- <button type="button" class="btn  btn-success btn-sm" (click)="openModal()">START PREDICTION</button> -->
      </div>
   </div>
