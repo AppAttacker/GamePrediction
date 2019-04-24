@@ -33,6 +33,7 @@ export class MatchScheduleComponent implements OnInit {
   }
   updateMatchList(){
     alert("list updated..");
+    return false;
   }
 
 }

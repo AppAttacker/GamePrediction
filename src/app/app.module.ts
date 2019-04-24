@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { IdleTimeOutService } from './service/idle-time-out.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     // ])
     
   ],
-  providers: [],
+  providers: [IdleTimeOutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

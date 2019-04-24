@@ -28,10 +28,12 @@ export class QuestionaryComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
   
   id : any;
+  username: string;
   // matchDetails: any;
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.username = sessionStorage.getItem('username');
     // this.matchDetails = this.route.snapshot.paramMap.get('id');
   }
   onSubmit() {

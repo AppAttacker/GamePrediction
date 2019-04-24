@@ -14,6 +14,7 @@ export class LeaderBoardComponent implements OnInit {
   
   updateMatchList(){
     alert("list updated..");
+    return false;
   }
 
 }
