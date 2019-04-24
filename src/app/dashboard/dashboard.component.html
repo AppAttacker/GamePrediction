@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-lg-3 col-sm-3 display-3"><img src="../assets/cricket1.png"></div>
         <div class="col-lg-8 col-sm-8 text-warning" style="text-align: left;">
-          <div class=" px-3" style="padding-top: 30px; text-align: left;">
+          <div class="px-3" style="padding-top: 30px; text-align: left;">
             <h6>Hi {{username}}..</h6>
           </div>
         </div>
@@ -19,9 +19,9 @@
       </div>
     </div>
     <div class="col-lg-2 col-sm-2 mt-auto">
-      <div *ngIf="admin=='admin_1'" class="container">
+      <div *ngIf="admin=='admin_1'">
         <div class="btn-group div-left" style="border-radius: 1rem;">
-          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             Admin
           </button>
@@ -35,8 +35,8 @@
         
       
       </div>
-      <span style="text-align: end; height: 10%; width: 10%;" class="div-right">
-        <a class="btn btn-warning"(click)="resetUserDetails()" role="button">Logout</a>
+      <span style="padding-left: 10px;">
+        <a class="btn btn-warning btn-sm"(click)="resetUserDetails()" role="button">Logout</a>
       </span>
     </div>
   </div>
@@ -55,8 +55,12 @@
             <router-outlet name="dashboard"></router-outlet>
           </div>
         </div>
+        
         <div class="col-lg-4 col-sm-4">
-          <app-leader-board></app-leader-board>
+          
+              <app-leader-board></app-leader-board>
+          
+          
         </div>
       </div>
     </div>
