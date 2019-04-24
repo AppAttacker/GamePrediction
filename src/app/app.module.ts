@@ -12,10 +12,11 @@ import { UserTemplateComponent } from './user-template/user-template.component';
 import { LeaderBoardComponent } from './leader-board/leader-board.component';
 import { QuestionaryComponent } from './questionary/questionary.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IdleTimeOutService } from './service/idle-time-out.service';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +27,15 @@ import { IdleTimeOutService } from './service/idle-time-out.service';
     LeaderBoardComponent,
     QuestionaryComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule
     // RouterModule.forRoot([
     //   {path: '', component: UserTemplateComponent},
