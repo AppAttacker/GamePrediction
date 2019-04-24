@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
     this.username = sessionStorage.getItem('username');
     console.log('inside dashboard..');
     if(this.username==null){
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('/wcpredict');
     }
   }
   resetUserDetails(){
