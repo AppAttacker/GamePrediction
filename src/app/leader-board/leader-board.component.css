@@ -7,7 +7,7 @@
     padding-right:10px;
 }
 .scrollapply {
-    height: calc(88.5vh - 123px);
+    height: calc(85vh - 123px);
     /* height: 100%; */
     width: 100%;
     overflow-y: scroll;
@@ -16,3 +16,7 @@
   table tbody {
     color: rgb(245, 242, 77);
   }
+  table thead {
+    color: whitesmoke;
+  }
+  

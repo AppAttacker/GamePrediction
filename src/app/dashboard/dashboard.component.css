@@ -1,9 +1,9 @@
 img {
     border-radius: 45%;
   }
-.jumbotron {
-    padding-bottom: 2rem;
-    padding-top: 2rem;
+.jumbotron{
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
 }
 .div-left{
   float:left;
