@@ -38,8 +38,9 @@ export class AuthenticationService {
     //       return user;
     //   }));
     sessionStorage.setItem('userloggedIn','true');
-    sessionStorage.setItem('userid','karth2k');
+    sessionStorage.setItem('userid','1');
     sessionStorage.setItem('username',username);
+    sessionStorage.setItem('rank',"15");
     return null;
   }
 

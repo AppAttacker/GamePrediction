@@ -1,21 +1,22 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container-fluid" style="margin: 5px 5px 5px 5px; padding-right: 25px;">
-  <div class="row jumbotron jumbotron-fluid" style="background-color: rgb(206, 203, 203); border-radius: .5rem;">
+  <div class="row jumbotron jumbotron-fluid bg-dark" style="background-color: rgb(206, 203, 203); border-radius: .5rem;">
     <div class="col-lg-3 col-sm-3"
-      style="margin-left: 25px; margin-right: 25px; background-color: rgb(107, 106, 106); border-radius: 1rem;">
+      style="margin-left: 25px; margin-right: 25px; background-color: rgb(206, 203, 203); border-radius: 1rem;">
       <div class="row">
-        <div class="col-lg-3 col-sm-3 display-3"><img src="../assets/cricket1.png"></div>
-        <div class="col-lg-8 col-sm-8 text-warning" style="text-align: left;">
+        <div class="col-lg-3 col-sm-3 display-3 div-left" style="width: 35%"><img src="../assets/cricket1.png"></div>
+        <div class="col-lg-8 col-sm-8 text-dark div-right" style="text-align: left;width: 60%;">
           <div class="px-3" style="padding-top: 30px; text-align: left;">
-            <h6>Hi {{username}}..</h6>
+            <h6><strong>Hi {{username}}..</strong></h6>
+            Your rank: 31
           </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-6 col-sm-6" style="border-radius: 1rem;">
+    <div class="col-lg-6 col-sm-6" style="border-radius: 1rem;color: rgb(183, 233, 103)">
       <div class="container">
         <h1 class="display-4">Game Prediction</h1>
-        <p class="lead">Lets play with your luck...</p>
+        <p class="lead">With Small luck, Huge knowledge...</p>
       </div>
     </div>
     <div class="col-lg-2 col-sm-2 mt-auto">
@@ -26,14 +27,11 @@
             Admin
           </button>
           <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button">Action</button>
-            <button class="dropdown-item" type="button">Another action</button>
-            <button class="dropdown-item" type="button">Something else here</button>
+            <button class="dropdown-item" type="button" (click)="showAnswerProvider()">Final Answer</button>
+            <!-- <button class="dropdown-item" type="button">Another action</button>
+            <button class="dropdown-item" type="button">Something else here</button> -->
           </div>
-          
         </div>
-        
-      
       </div>
       <span style="padding-left: 10px;">
         <a class="btn btn-warning btn-sm"(click)="resetUserDetails()" role="button">Logout</a>
@@ -52,15 +50,12 @@
           <div class="">
             <!-- <app-user-template></app-user-template> -->
             <!-- <app-questionary></app-questionary> -->
-            <router-outlet name="dashboard"></router-outlet>
+            <router-outlet></router-outlet>
           </div>
         </div>
         
         <div class="col-lg-4 col-sm-4">
-          
-              <app-leader-board></app-leader-board>
-          
-          
+          <app-leader-board></app-leader-board>
         </div>
       </div>
     </div>
@@ -81,5 +76,24 @@
     </div>
   </div>
 </div>
-
+<!-- Modal -->
+<div class="modal fade" #exampleModal id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Please Save/Submit your current question session..
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
 <!-- <router-outlet></router-outlet> -->

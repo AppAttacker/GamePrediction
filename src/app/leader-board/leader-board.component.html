@@ -1,110 +1,30 @@
-<div class="card" style="border-radius: .5rem; background-color: rgb(196, 198, 202); height: calc(97.5vh - 123px);">
-    <div style="padding-top: 10px;"><span class="div-left">
-        <h5 class="card-title">Leaderboard</h5>
-      </span><span class="div-right"><a href="#"><img src="../../assets/refresh1.png" style="border-radius: 50%;"
-            (click)="updateMatchList()"></a></span></div>
-  <div class="card-body bg-dark" style="padding-top: 0px; margin-left: 15px; margin-right: 15px; margin-bottom: 25px; border-radius: .5rem;">
-    
-      <div class="scrollapply" style="border-radius: .5rem;">
-    <table class="table table-borderless table-hover" style=" border-radius: .5rem;">
-      <thead>
-        <th>Name</th>
-        <th>Played</th>
-        <th>Points</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Ram</td>
-          <td>15</td>
-          <td>105</td>
-        </tr>
-        <tr>
-          <td>Peter</td>
-          <td>10</td>
-          <td>95</td>
-        </tr>
-        <tr>
-          <td>Sebastian</td>
-          <td>5</td>
-          <td>31</td>
-        </tr>
-        <tr>
-          <td>Ram</td>
-          <td>15</td>
-          <td>105</td>
-        </tr>
-        <tr>
-          <td>Peter</td>
-          <td>10</td>
-          <td>95</td>
-        </tr>
-        <tr>
-          <td>Sebastian</td>
-          <td>5</td>
-          <td>31</td>
-        </tr>
-        <tr>
-          <td>Ram</td>
-          <td>15</td>
-          <td>105</td>
-        </tr>
-        <tr>
-          <td>Peter</td>
-          <td>10</td>
-          <td>95</td>
-        </tr>
-        <tr>
-          <td>Sebastian</td>
-          <td>5</td>
-          <td>31</td>
-        </tr>
-        <tr>
-          <td>Ram</td>
-          <td>15</td>
-          <td>105</td>
-        </tr>
-        <tr>
-          <td>Peter</td>
-          <td>10</td>
-          <td>95</td>
-        </tr>
-        <tr>
-          <td>Sebastian</td>
-          <td>5</td>
-          <td>31</td>
-        </tr>
-        <tr>
-          <td>Ram</td>
-          <td>15</td>
-          <td>105</td>
-        </tr>
-        <tr>
-          <td>Peter</td>
-          <td>10</td>
-          <td>95</td>
-        </tr>
-        <tr>
-          <td>Sebastian</td>
-          <td>5</td>
-          <td>31</td>
-        </tr>
-        <tr>
-          <td>Ram</td>
-          <td>15</td>
-          <td>105</td>
-        </tr>
-        <tr>
-          <td>Peter</td>
-          <td>10</td>
-          <td>95</td>
-        </tr>
-        <tr>
-          <td>Sebastian</td>
-          <td>5</td>
-          <td>31</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="card" style="border-radius: .5rem; background-color: rgb(196, 198, 202); height: calc(100vh - 123px);">
+  <div style="padding-top: 10px;"><span class="div-left">
+      <h5 class="card-title">Leaderboard</h5>
+    </span><span class="div-right"><a href="#"><img src="../../assets/refresh1.png" style="border-radius: 50%;"
+          (click)="updateMatchList()"></a></span></div>
+  
+    <div class="card-body bg-dark" style="border-radius: .5rem; height: calc(90vh - 123px);">
+        <div class="table-responsive">
+            <table class="table">
+        <thead>
+          <tr>
+            <th>Place</th>
+            <th style="width: 70%;">Name</th>
+            <th>Played</th>
+            <th>Points</th>
+          </tr> 
+        </thead>
+        <tbody style="width: 100%;">
+          <tr *ngFor="let item of leaderboardDataArray">
+              <td>{{item.rank}}</td>
+              <td style="width: 70%">{{item.username}}</td>
+              <td style="text-align: right">{{item.matchCount}}</td>
+              <td style="width: 50%; text-align: right">{{item.score}}</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

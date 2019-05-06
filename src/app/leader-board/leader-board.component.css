@@ -6,17 +6,31 @@
     float:right;
     padding-right:10px;
 }
-.scrollapply {
-    height: calc(85vh - 123px);
-    /* height: 100%; */
-    width: 100%;
-    overflow-y: scroll;
-  }
   
-  table tbody {
-    color: rgb(245, 242, 77);
+ table tbody {
+    height: calc(78vh - 123px);
+    display: block;
+    overflow-y: scroll;
+    color: rgb(183, 233, 103);
+    padding: 15px;
   }
-  table thead {
+table thead {
+    display: block;
+      
+    text-align: center;
     color: whitesmoke;
   }
+.table th {
+  border-top: 0px solid #dee2e6;
+  border-bottom: 0px solid #dee2e6;
+}
+.table td{
+  border-bottom: 1px solid #dee2e6;
+}
+.card-body {
+  padding: .25rem;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
   

@@ -1,8 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-// var CanvasJS = require('./canvasjs.min');
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatchScheduleComponent } from './match-schedule/match-schedule.component';
@@ -17,6 +14,10 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IdleTimeOutService } from './service/idle-time-out.service';
 import { RegisterComponent } from './register/register.component';
+import { FilterFixtureByTeamPipe } from './filter/filter-fixture-by-team.pipe';
+import { AnswerComponent } from './answer/answer.component';
+import { NumericDirective } from './directives/numeric.directive';
+import { BlockcopypasteDirective } from './directives/blockcopypaste.directive';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,11 @@ import { RegisterComponent } from './register/register.component';
     QuestionaryComponent,
     LoginComponent,
     DashboardComponent,
-    RegisterComponent
+    RegisterComponent,
+    FilterFixtureByTeamPipe,
+    AnswerComponent,
+    NumericDirective,
+    BlockcopypasteDirective
   ],
   imports: [
     BrowserModule,
@@ -37,14 +42,8 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule
-    // RouterModule.forRoot([
-    //   {path: '', component: UserTemplateComponent},
-    //   {path: 'predictionPage/:id', component: QuestionaryComponent},
-    //   {path: 'wcpredict/login', component: LoginComponent},
-    //   {path: 'wcpredict/dashboard', component: DashboardComponent}
-    // ])
-    
   ],
+  
   providers: [IdleTimeOutService],
   bootstrap: [AppComponent]
 })

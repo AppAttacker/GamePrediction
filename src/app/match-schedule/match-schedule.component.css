@@ -1,5 +1,5 @@
 .scrollapply {
-    height: calc(90vh - 123px);
+    height: calc(89vh - 123px);
     /* height: 100%; */
     overflow-y: scroll;
   }
@@ -13,4 +13,8 @@
 }
 img {
   border-radius: 50%;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
 }

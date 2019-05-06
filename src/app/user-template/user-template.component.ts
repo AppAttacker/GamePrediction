@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { MatchService } from '../service/match.service';
+import { UserDashboard } from '../modal/user-dashboard';
+import { ChartData } from '../modal/chart-data';
 
 declare var CanvasJS: any;
 
@@ -9,11 +12,26 @@ declare var CanvasJS: any;
 })
 export class UserTemplateComponent implements OnInit {
 
-  constructor() { }
+  userDashboardArray: UserDashboard[] = []; 
+  userDashoard: UserDashboard; 
+  totMatchPlayed: number;
+  totScore: number = 0;
+  rank: string;
+  chartDataArray: ChartData[] = [];
+  chartData: ChartData;
+  chart: any;
+  
+  constructor(private matchService:MatchService) { }
 
   ngOnInit() { 
-    let chart = new CanvasJS.Chart("chartContainer", {
-      animationEnabled: true,
+    
+    this.getUserDashboardData();
+    this.rank = sessionStorage.getItem("rank");
+
+    // this.setChartData();
+    
+    this.chart = new CanvasJS.Chart("chartContainer", {
+      // animationEnabled: true,
       exportEnabled: false,
       title: {
         text: ""
@@ -21,31 +39,30 @@ export class UserTemplateComponent implements OnInit {
       backgroundColor: "white",
       data: [{
         type: "column",
-        dataPoints: [
-          { y: 71, label: "Match1" },
-          { y: 55, label: "Match2" },
-          { y: 50, label: "Match3" },
-          { y: 65, label: "Match4" },
-          { y: 95, label: "Match5" },
-          { y: 68, label: "Match6" },
-          { y: 28, label: "Match7" },
-          { y: 34, label: "Match8" },
-          { y: 71, label: "Match9" },
-          { y: 55, label: "Match10" },
-          { y: 50, label: "Match11" },
-          { y: 65, label: "Match12" },
-          { y: 95, label: "Match13" },
-          { y: 68, label: "Match14" },
-          { y: 28, label: "Match15" },
-          { y: 34, label: "Match16" },
-          { y: 14, label: "Match17" }
-        ]
+        dataPoints: this.chartDataArray
       }]
     });
       
-    chart.render();
+    this.chart.render();
+  }
+
+  ngAfterViewChecked(){
+    this.chart.render();
   }
   
-   
+  getUserDashboardData(){
+    const userDashboardObserve = this.matchService.getUserDashboard(sessionStorage.getItem("userid"));
+    userDashboardObserve.subscribe((matchData: UserDashboard[]) => {
+        for (var i = 0; i < matchData.length; i++) {
+          this.chartData = { "y": matchData[i].points, "label": "Match: "+matchData[i].match.matchid }
+          this.chartDataArray.push(this.chartData);
+          this.totScore = this.totScore + matchData[i].points;
+        }
+        this.userDashboardArray = matchData;
+        this.totMatchPlayed = matchData.length;
+        
+    });
+    
+  }
 }
 

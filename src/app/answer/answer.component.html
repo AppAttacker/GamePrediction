@@ -1,0 +1,75 @@
+<form (ngSubmit)="onSubmit()" #questionForm="ngForm">
+  <div class="container-fluid" style="border-radius: .5rem; background-color: rgb(196, 198, 202);">
+    <div class="card"
+      style="border: none; border-radius: .5rem; height: calc(100vh - 123px); background-color: rgb(196, 198, 202);">
+      <h5 class="card-title" style="padding-top:10px;">Admin Page</h5>
+      <div class="card-body bg-dark text-white" style="margin-bottom: 13px; border-radius: .5rem;">
+        <div>
+          <div>
+            <label>Select match which you want to give answer:</label>
+            <input type="text" list="matchid" (onchange)="loadQuestions($event)" placeholder="Select Match"/>
+            <datalist id="matchid">
+              <option *ngFor="let match of matchScheduleArray">Match {{match.matchid}} - {{match.fromTeam.name}} Vs {{match.toTeam.name}}</option>
+            </datalist>
+          </div>
+        </div>
+        <div class="scrollapply" style="padding-top: 20px;">
+          <div *ngFor="let question of matchQuestionArray; first as isFirst; last as isLast; index as i;" style="padding-bottom: 20px;">
+            <!-- <img src="../../assets/images2.jpg" alt="Los Angeles"> -->
+
+            <h6><label>{{i+1}}. {{question.question.description}}</label></h6>
+            <div *ngIf='question.question.category==4' style="text-align: center">
+              <!-- <input type="text" [(ngModel)]="question.answer" [name]='question.descript' /> -->
+              <span style="padding-right: 20px;">
+                <select class="browser-default custom-select" name="wintype" #winOption id="winOption"
+                  [(ngModel)]='winMarginType' (change)='question.answer=0' style="padding-left: 5px; width: 15%">
+                  <option value="R">Run</option>
+                  <option value="W">Wicket</option>
+                </select>
+              </span>
+              <span style="padding-left: 20px;">
+                <input blockcopypaste numericOnly="true" type="text" class="form-control-sm" #inputVal [(ngModel)]="question.answer"
+                  name='"question"+question.matchPredictionId' style="padding-left: 5px; width: 20%">
+              </span>
+            </div>
+            <div *ngIf='question.question.category==3' style="text-align: center">
+              <!-- <input type="text" [(ngModel)]="question.answer" [name]='question.descript' /> -->
+              <input name='"range"+question.matchPredictionId' type="range" min="0" max="500"
+                [(ngModel)]="question.answer">
+              <span style="padding-left: 20px;">
+                <input type="text" class="form-control-sm" [(ngModel)]="question.answer"
+                  name='"answer"+question.matchPredictionId' style="padding-left: 5px; width: 10%">
+              </span>
+            </div>
+            <div *ngIf='question.question.category==2' style="text-align: center">
+              <input type="text" list="playerList" name='"playerOption"+question.matchPredictionId'
+                [(ngModel)]="question.answer" />
+              <datalist class="ui-datalist-data" id="playerList">
+                <option *ngFor="let player of playerArray">{{player.fullName+"("+player.country.code+")"}}</option>
+              </datalist>
+            </div>
+            <div *ngIf='question.question.category==1' style="text-align: center">
+              <!-- <input type="radio" checked="checked" id='"answer"+question.questionId' name='"answer"+question.questionId'><label for='"answer"+question.questionId'>one</label>
+              <input type="radio" id='"answer"+question.questionId' name='"answer"+question.questionId'><label for='"answer"+question.questionId'>two</label> -->
+              <div class="btn-group row">
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" value="match.fromTeam.name" />
+                  <span style="padding-left: 10px;">{{match.fromTeam.name}}</span>
+                </label>
+                <label class="btn btn-secondary" style="padding-left: 20px;">
+                  <input type="radio" name="options" value="match.toTeam.name" />
+                  <span style="padding-left: 10px;">{{match.toTeam.name}}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-sm" style="text-align: right">
+        <button type="button" class="btn btn-pill btn-warning btn-sm" (click)="closeSession()">Close</button>
+        <button type="submit" [disabled]="!questionForm.dirty" class="btn btn-pill btn-success btn-sm">Submit
+          changes</button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,24 +1,47 @@
-<div class="card text-white bg-dark" style="text-align: center;">
+<div class="card text-white bg-dark" style="text-align: center; margin-bottom: 10px">
   <div class="card-body" style="padding-top: 8px; padding-left: 5px; padding-right: 5px;">
-    <div [className]="(remainDays < 3)?'card-title div-left' : 'card-title'" style="font-size: medium; margin-bottom: 10px">Match Details</div><div class="div-right" *ngIf="(remainDays<3)" style="font-size: x-small;">{{remTimer}}</div>
-    <div  style="color: rgb(240, 238, 167);">
+    <div [className]="(remainDays < 3)?'card-title div-left' : 'card-title'" style="font-size: medium;">Match {{matchDetails.matchid}}
+    </div>
+    <div class="div-right" *ngIf="(remainDays<3)" style="font-size: x-small;">{{remTimer}}</div>
+    <div style="color: rgb(233, 240, 144);">
       <hr>
-        <div >
-          <img class="" src='../../assets/flags/{{matchDetails.from}}.png'>
-          {{matchDetails.name}} 
-          <img class="" src='../../assets/flags/{{matchDetails.to}}.png'>
+      <div>
+        <img class="" src='../../assets/flags/{{matchDetails.fromTeam.code|lowercase}}.png'>
+        {{matchDetails.fromTeam.name}} Vs {{matchDetails.toTeam.name}}
+        <img class="" src='../../assets/flags/{{matchDetails.toTeam.code|lowercase}}.png'>
+      </div>
+      <div style="padding-top: 10px;">Date: {{matchDetails.startTime | date: 'dd MMM yyyy hh:mm:ss a'}}</div>
+
+      <hr>
+      <div *ngIf='menuType=="completed"' class="btn-sm" style=" font-size: small; color: white;">
+        <!-- <div *ngIf="remainDays>2">
+          <a class="btn btn-success btn-sm" [class.disabled]="remainDays>2 ? true: false"
+            (click)="triggerQuestSection()" role="button">{{remTimer}}</a>
+        </div> -->
+        <div>
+          Your score : 0
         </div>
-        <div style="padding-top: 10px;">Start at {{matchDetails.startDate}}</div>
-        
-        <hr>
+      </div>
+      <div *ngIf='menuType=="ongoing"' class="btn-sm" style=" font-size: small; color: white;">
         <div *ngIf="remainDays>2">
-            <a class="btn btn-success btn-sm" [class.disabled]="remainDays>2 ? true: false" [routerLink]=" ['/wcpredict/dashboard', { outlets: { 'dashboard': ['predictionPage', matchDetails.id] } }]" role="button">{{remTimer}}</a>
+          <a class="btn btn-success btn-sm" [class.disabled]="remainDays>2 ? true: false"
+            (click)="triggerQuestSection()" role="button">{{remTimer}}</a>
         </div>
         <div *ngIf="(remainDays<3)">
-            <a class="btn btn-success btn-sm" [class.disabled]="remainDays>2 ? true: false" [routerLink]=" ['/wcpredict/dashboard', { outlets: { 'dashboard': ['predictionPage', matchDetails.id] } }]" role="button">START PREDICTION</a>
+          <a [className]="message=='inprogress'?'btn btn-danger btn-sm':'btn btn-success btn-sm'"
+            [class.disabled]="remainDays>2 || message=='inprogress' ? true: false" (click)="triggerQuestSection()">START PREDICTION</a>
+
         </div>
-        
-        <!-- <button type="button" class="btn  btn-success btn-sm" (click)="openModal()">START PREDICTION</button> -->
-     </div>
+      </div>
+      <div *ngIf='menuType=="fixture"' class="btn-sm" style=" font-size: small; color: white;">
+        <!-- <div *ngIf="remainDays>2">
+          <a class="btn btn-success btn-sm" [class.disabled]="remainDays>2 ? true: false"
+            (click)="triggerQuestSection()" role="button">{{remTimer}}</a>
+        </div> -->
+        <div>
+          <a class="btn btn-primary btn-sm" [class.disabled]="message=='inprogress'" (click)="triggerMatchDetail()" role="button">Match Details</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

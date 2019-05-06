@@ -1,8 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Question } from '../question';
-import { IMatchDetails } from '../imatch-details';
+import { Question } from '../modal/question';
+import { MessageService } from '../service/message.service';
+import { MatchService } from '../service/match.service';
+import { UserPrediction } from '../modal/user-prediction';
+import { User } from '../modal/user';
+import { Match } from '../modal/match';
+import { Players } from '../modal/players';
+import { MatchQuestions } from '../modal/match-questions';
 
 @Component({
   selector: 'app-questionary',
@@ -11,41 +17,118 @@ import { IMatchDetails } from '../imatch-details';
 })
 export class QuestionaryComponent implements OnInit {
 
+  winMarginType: string = "R";
+  user: User;
+  match: Match;
+  player: Players;
+  playerArray: Players[] = [];
+  matchQuestion: MatchQuestions;
+  matchQuestionArray: MatchQuestions[];
+  userPrediction: UserPrediction;
+
   questionForm = new FormGroup({
     question: new FormControl('Who will win this match:'),
     answer: new FormControl(''),
   });
-
-  question1: Question={descript: 'what will be the winning margin?', answer:0, type:'range', priority:true};
-  question2: Question={descript: 'who will be man of the match award winner?', answer:'', type:'type1', priority:true};
-  question3: Question={descript: 'who will hit max(distance) six?', answer:'', type:'type2', priority:true};
-  question4: Question={descript: 'who will take maximum wicket in this match?', answer:'', type:'range', priority:true};
-  question5: Question={descript: 'who will win toss?', answer:0, type:'range', priority:true};
-
-  questions: Question[] ;
-  questionList = [this.question1,this.question2,this.question3,this.question4,this.question5];
   
-  constructor(private route: ActivatedRoute) { }
-  
-  id : any;
+  questionList = [];
+
+  id: any;
   username: string;
+  userId: number;
   // matchDetails: any;
 
+  constructor(private router: Router, private route: ActivatedRoute, private messageService: MessageService, private matchService: MatchService) { }
+
   ngOnInit() {
+    console.log('inside question component');
+    console.log(parseInt("100"));
+    console.log(sessionStorage.getItem('userid'));
     this.id = this.route.snapshot.paramMap.get('id');
     this.username = sessionStorage.getItem('username');
-    // this.matchDetails = this.route.snapshot.paramMap.get('id');
+    this.userId = parseInt(sessionStorage.getItem('userid'));
+    
+    this.loadQuestions();
   }
+
+  sendMessage(questSessionStatus: string): void {
+    // send message to subscribers via observable subject
+    this.messageService.sendMessage(questSessionStatus);
+  }
+
+  loadQuestions(){
+    const userQuestObserve = this.matchService.getPredictionQuest(this.userId, this.id);
+    userQuestObserve.subscribe((userPrediction: UserPrediction) => {
+      this.userPrediction = userPrediction; 
+      this.user = userPrediction.user;
+      this.match = userPrediction.match;
+      this.playerArray = userPrediction.players;
+      this.matchQuestionArray = userPrediction.matchQuestions;
+      this.userPrediction.matchQuestions.forEach(element => {
+        if (element.question.category == 4 && element.answer != "") {
+          this.winMarginType = element.answer.split("_")[0];
+          element.answer = element.answer.split("_")[1];
+          
+        }
+        // if (element.question.category == 2 && (element.answer)) {
+        //   let winMargin = element.answer.split("(")[1];
+        //   element.answer = winMargin[0];
+        // }
+      
+        console.log(element);
+        console.log(this.winMarginType);
+      });
+      
+
+    });
+  }
+
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    this.questionList.forEach(element => {
+    this.matchQuestionArray.forEach(element => {
+      if (element.question.category == 4 && element.answer != "") {
+        element.answer = this.winMarginType + "_" + element.answer
+      }
+      
       console.log(element);
-    }); 
-    // console.log(JSON.stringify(this.questionList));
+      console.log(this.winMarginType);
+    });
+    this.userPrediction.matchQuestions = this.matchQuestionArray;
+    
+    this.matchService.submitPredictionQuest(this.userPrediction);
+    sessionStorage.setItem('questSessionInprogress', 'false');
+    this.sendMessage('submitted');
+    this.router.navigateByUrl('/wcpredict/dashboard');
+    // window.location.href = "/wcpredict/dashboard";
   }
 
-  setupdatedValue(){
+  gotoDashboard() {
+    if (sessionStorage.getItem('questSessionInprogress') == 'true') {
+      alert('Please Save/Submit your current question session');
+      return false;
+    } else {
+      sessionStorage.setItem('questSessionInprogress', 'false');
+      this.sendMessage('closed');
+      this.router.navigate(['/wcpredict/dashboard']);
 
+    }
   }
 
+  public inputValidator(event: any) {
+    //console.log(event.target.value);
+    const pattern = /^[a-zA-Z0-9]*$/;   
+    //let inputChar = String.fromCharCode(event.charCode)
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^a-zA-Z0-9]/g, "");
+      // invalid character, prevent input
+
+    }
+  }
+
+  closeSession() {
+    sessionStorage.setItem('questSessionInprogress', 'false');
+    this.sendMessage('closed');
+    this.router.navigate(['/wcpredict/dashboard']);
+
+  }
 }

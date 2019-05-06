@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IdleTimeOutService } from '../service/idle-time-out.service';
+import { QuestionaryComponent } from '../questionary/questionary.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,8 +12,9 @@ export class DashboardComponent implements OnInit {
   title = 'GamePrediction';
   admin = "admin_1";
   username: string;
+  private routedComponent: QuestionaryComponent;
   
-  constructor(private router: Router, private idletimeout: IdleTimeOutService) { }
+  constructor(private router: Router, public route: ActivatedRoute) { }
 
   ngOnInit() {
     this.username = sessionStorage.getItem('username');
@@ -33,5 +34,17 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  public setRoutedComponent(componentRef: QuestionaryComponent){
+    console.log('inside dashboard compoent routing change');
+    this.routedComponent = componentRef;
+  }
 
+  showAnswerProvider(){
+    // this.router.navigate(['answerPage']);
+    if (sessionStorage.getItem('questSessionInprogress') == 'true') {
+      alert('Please Save/Submit your current question session');
+    }else{
+      this.router.navigate([ 'answerPage'], { relativeTo: this.route });
+    }
+  }
 }
