@@ -8,6 +8,8 @@ import { Leaderboard } from '../modal/leaderboard';
 import { Match } from '../modal/match';
 import { MatchQuestions } from '../modal/match-questions';
 import { error } from '@angular/compiler/src/util';
+import { User } from '../modal/user';
+import { MatchDetails } from '../modal/match-details';
 
 @Injectable({
   providedIn: 'root'
@@ -17,17 +19,26 @@ export class MatchService {
   constructor(private http: HttpClient) { }
 
   // 10.252.52.157
+  hostURL: string ='localhost';
+  // hostURL: string ='10.252.52.157';
+
   restURL: string = 'http://localhost:8080/game/matchschedule';
-  questionUrl: string = 'http://localhost:8084/gameprediction/api/getQuestions';
-  questionSaveUrl: string = 'http://localhost:8084/gameprediction/api/saveDetails';
-  userdashgboardUrl: string = 'http://localhost:8084/gameprediction/api/userdashboard';
-  leaderUrl: string = 'http://localhost:8084/gameprediction/api/leaderdashboard';
-  matchScheduleUrl: string = 'http://localhost:8084/gameprediction/api/matchfixture';
+  questionUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/getQuestions';
+
+  questionSaveUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/saveDetails';
+  questionSubmitUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/submitDetails';
+  questionAdminSubmitUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/submitfinalanswer';
+
+  userdashgboardUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/userdashboard';
+  leaderUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/leaderdashboard';
+  // matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchfixture';
+  matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchdetails';
 
 
-  getMatchScheduleList(): Observable<Match[]> {
+  getMatchScheduleList(userId: number): Observable<MatchDetails> {
     // return this.http.get<IMatchDetails[]>(this.restURL);
-    return this.http.get<Match[]>(this.matchScheduleUrl);
+    const params = new HttpParams().set('userId', "1");
+    return this.http.get<MatchDetails>(this.matchScheduleUrl,{params});
   }
 
   getPredictionQuest(userId: number, matchId: number): Observable<UserPrediction> {
@@ -36,11 +47,9 @@ export class MatchService {
     return this.http.get<UserPrediction>(this.questionUrl, { params });
   }
 
-  submitPredictionQuest(userPrediction: UserPrediction) {
-    
-    console.log("inside submitPredictionQuest");
+  savePredictionQuest(userPrediction: UserPrediction) {
+    console.log("inside savePredictionQuest");
     console.log(userPrediction);
-    
     this.http.post(this.questionSaveUrl, userPrediction).subscribe(
       data => {
         console.log("POST Request is successful ", data);
@@ -48,10 +57,33 @@ export class MatchService {
       error => {
         console.log("Error", error);
       }
-
     );
+  }
 
+  submitPredictionQuestByUser(userPrediction: UserPrediction) {
+    console.log("inside submitPredictionQuestByUser");
+    console.log(userPrediction);
+    this.http.post(this.questionSubmitUrl, userPrediction).subscribe(
+      data => {
+        console.log("POST Request is successful ", data);
+      },
+      error => {
+        console.log("Error", error);
+      }
+    );
+  }
 
+  submitPredictionQuestByAdmin(userPrediction: UserPrediction) {
+    console.log("inside submitPredictionQuestByAdmin");
+    console.log(userPrediction);
+    this.http.post(this.questionAdminSubmitUrl, userPrediction).subscribe(
+      data => {
+        console.log("POST Request is successful ", data);
+      },
+      error => {
+        console.log("Error", error);
+      }
+    );
   }
 
   getUserDashboard(userid: string): Observable<UserDashboard[]> {
@@ -62,6 +94,7 @@ export class MatchService {
 
   getLeaderboard() {
     console.log("inside getLeaderboard...");
-    return this.http.get<Leaderboard[]>(this.leaderUrl);
+    return this.http.get<User[]>(this.leaderUrl);
   }
+  
 }

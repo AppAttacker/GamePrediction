@@ -4,5 +4,7 @@ export class User {
     firstName: string;
     lastName: string;
     rank: number;
-    userType: string
+    userType: string;
+    overallPoints: number;
+    noOfMatchPlayed: number;
 }

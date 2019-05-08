@@ -1,5 +1,5 @@
 .scrollapply {
-    height: calc(69vh - 123px);
+    height: calc(67vh - 123px);
     /* height: 100%; */
     overflow-y: scroll;
   }
@@ -12,6 +12,7 @@
     float:right;
     padding-right:10px;
   }
+
   /* Customize the label (the container) */
 .container {
   display: block;

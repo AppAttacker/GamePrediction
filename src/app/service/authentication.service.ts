@@ -41,6 +41,7 @@ export class AuthenticationService {
     sessionStorage.setItem('userid','1');
     sessionStorage.setItem('username',username);
     sessionStorage.setItem('rank',"15");
+    sessionStorage.setItem('userType',"participant");
     return null;
   }
 

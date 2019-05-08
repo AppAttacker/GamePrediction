@@ -18,6 +18,8 @@ import { FilterFixtureByTeamPipe } from './filter/filter-fixture-by-team.pipe';
 import { AnswerComponent } from './answer/answer.component';
 import { NumericDirective } from './directives/numeric.directive';
 import { BlockcopypasteDirective } from './directives/blockcopypaste.directive';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from './service/confirm-dialog.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { BlockcopypasteDirective } from './directives/blockcopypaste.directive';
     FilterFixtureByTeamPipe,
     AnswerComponent,
     NumericDirective,
-    BlockcopypasteDirective
+    BlockcopypasteDirective,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,9 +45,10 @@ import { BlockcopypasteDirective } from './directives/blockcopypaste.directive';
     FormsModule,
     ReactiveFormsModule,
     RouterModule
+    
   ],
   
-  providers: [IdleTimeOutService],
+  providers: [IdleTimeOutService,ConfirmDialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

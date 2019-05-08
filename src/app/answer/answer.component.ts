@@ -6,6 +6,7 @@ import { Players } from '../modal/players';
 import { MatchQuestions } from '../modal/match-questions';
 import { UserPrediction } from '../modal/user-prediction';
 import { MatchService } from '../service/match.service';
+import { MatchDetails } from '../modal/match-details';
 
 @Component({
   selector: 'app-answer',
@@ -26,43 +27,64 @@ export class AnswerComponent implements OnInit {
   matchSchedule: Match;
   matchScheduleArray: Match[] = [];
 
+  matchDetails:MatchDetails;
+
   id: any;
   username: string;
   userId: number;
+  selectedMatch: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private matchService: MatchService) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
     this.username = sessionStorage.getItem('username');
     this.userId = parseInt(sessionStorage.getItem('userid'));
     this.getMatchList();
     // this.loadQuestions();
   }
   
-  loadQuestions(event: Event){
-    alert("inside answer comp -  load qiestion"+event.target);
-    const userQuestObserve = this.matchService.getPredictionQuest(this.userId, this.id);
-    userQuestObserve.subscribe((userPrediction: UserPrediction) => {
-      this.userPrediction = userPrediction; 
-      this.user = userPrediction.user;
-      this.match = userPrediction.match;
-      this.playerArray = userPrediction.players;
-      this.matchQuestionArray = userPrediction.matchQuestions;
-    });
+  loadQuestions(){
+    // alert("inside answer comp -  load question");
+    if(this.selectedMatch!=""){
+      var str: string = this.selectedMatch.split("-")[0].split(" ")[1];
+      // var matchId = str.substr str.length
+      console.log(str);
+      const userQuestObserve = this.matchService.getPredictionQuest(this.userId, parseInt(str));
+      userQuestObserve.subscribe((userPrediction: UserPrediction) => {
+        this.userPrediction = userPrediction; 
+        this.user = userPrediction.user;
+        this.match = userPrediction.match;
+        this.playerArray = userPrediction.players;
+        this.matchQuestionArray = userPrediction.matchQuestions;
+        this.userPrediction.matchQuestions.forEach(element => {
+          if (element.question.category == 4 && element.answer != "") {
+            this.winMarginType = element.answer.split("_")[0];
+            element.answer = element.answer.split("_")[1];
+            
+          }
+          // if (element.question.category == 2 && (element.answer)) {
+          //   let winMargin = element.answer.split("(")[1];
+          //   element.answer = winMargin[0];
+          // }
+        
+          console.log(element);
+          console.log(this.winMarginType);
+        });
+      });
+    }
   }
 
   getMatchList(){
-    return this.matchService.getMatchScheduleList().subscribe(
+    return this.matchService.getMatchScheduleList(this.userId).subscribe(
         // matchObj => this.matchList = matchObj
-        matchObj => this.matchScheduleArray = matchObj
+        matchObj => this.matchScheduleArray = matchObj.overallMatches
     );
   }
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
     this.matchQuestionArray.forEach(element => {
-      if (element.question.category == 2) {
+      if (element.question.category == 2 && (element.answer != null || element.answer != "")) {
         element.answer = this.winMarginType + "_" + element.answer
       }
 
@@ -71,8 +93,7 @@ export class AnswerComponent implements OnInit {
     });
     this.userPrediction.matchQuestions = this.matchQuestionArray;
     
-    this.matchService.submitPredictionQuest(this.userPrediction);
-    sessionStorage.setItem('questSessionInprogress', 'false');
+    this.matchService.submitPredictionQuestByAdmin(this.userPrediction);
     this.router.navigateByUrl('/wcpredict/dashboard');
     // window.location.href = "/wcpredict/dashboard";
   }

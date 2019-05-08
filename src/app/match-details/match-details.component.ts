@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from '../service/message.service';
 import { Subscription } from 'rxjs';
 import { Match } from '../modal/match';
+import { ConfirmDialogService } from '../service/confirm-dialog.service';
 
 // const secondsCounter = interval(1000);
 
@@ -23,8 +24,10 @@ export class MatchDetailsComponent implements OnInit {
   inProgress: boolean;
   message: string;
   subscription: Subscription;
+  userType: string;
+  userScore: number;
 
-  constructor(private router: Router, public route: ActivatedRoute, private messageService: MessageService) {
+  constructor(private router: Router, public route: ActivatedRoute, private messageService: MessageService,private confirmDialogService: ConfirmDialogService) {
       this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message.text; });
       this.message = sessionStorage.getItem('questSessionInprogress');
    }
@@ -40,18 +43,20 @@ export class MatchDetailsComponent implements OnInit {
 
   ngOnInit() {
     // this.distance = this.todate - this.today;
+    this.userType = sessionStorage.getItem('userType');
     this.secondsCounter = setInterval(() => { 
       this.getDateCountDown(); 
       }, 1000);
-      
+      this.userScore = parseInt(sessionStorage.getItem('userScore'));
   }
   
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
     this.subscription.unsubscribe();
   }
-
+  
   triggerQuestSection(){
+    
     if(sessionStorage.getItem('questSessionInprogress')=='true'){
       alert('Please Save/Submit your current question session');
       return false;
@@ -66,7 +71,6 @@ export class MatchDetailsComponent implements OnInit {
   triggerMatchDetail(){
     if(sessionStorage.getItem('questSessionInprogress')=='true'){
       alert('Please Save/Submit your current question session');
-      
     }else{
       alert("match details");
     }
@@ -86,5 +90,4 @@ export class MatchDetailsComponent implements OnInit {
     this.remainDays = days;
     this.remTimer = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }
-  
 }

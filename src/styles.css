@@ -21,3 +21,7 @@ html *
 {
   font-family: Verdana, Geneva, Tahoma, sans-serif !important;
 }
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}

@@ -1,6 +1,6 @@
 .carousel-control-next-icon, .carousel-control-prev-icon {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 }
 
 .carousel-indicators li {
@@ -20,6 +20,14 @@
     height:50px;
     overflow:auto;
  }
+ .div-left{
+  float:left;
+  padding-left:10px;
+}
+.div-right{
+  float:right;
+  padding-right:10px;
+}
  
 /* range UI design */
   input[type=range] {

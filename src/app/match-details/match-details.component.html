@@ -1,8 +1,8 @@
 <div class="card text-white bg-dark" style="text-align: center; margin-bottom: 10px">
   <div class="card-body" style="padding-top: 8px; padding-left: 5px; padding-right: 5px;">
-    <div [className]="(remainDays < 3)?'card-title div-left' : 'card-title'" style="font-size: medium;">Match {{matchDetails.matchid}}
+    <div [className]="(remainDays < 3 && menuType=='ongoing')?'card-title div-left' : 'card-title'" style="font-size: medium;">Match {{matchDetails.matchid}}
     </div>
-    <div class="div-right" *ngIf="(remainDays<3)" style="font-size: x-small;">{{remTimer}}</div>
+    <div class="div-right" *ngIf="(remainDays<3 && userType!='admin' && menuType=='ongoing')" style="font-size: x-small;">{{remTimer}}</div>
     <div style="color: rgb(233, 240, 144);">
       <hr>
       <div>
@@ -19,7 +19,7 @@
             (click)="triggerQuestSection()" role="button">{{remTimer}}</a>
         </div> -->
         <div>
-          Your score : 0
+          Your score : {{userScore}}
         </div>
       </div>
       <div *ngIf='menuType=="ongoing"' class="btn-sm" style=" font-size: small; color: white;">

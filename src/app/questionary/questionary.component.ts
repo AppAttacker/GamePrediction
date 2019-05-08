@@ -95,7 +95,26 @@ export class QuestionaryComponent implements OnInit {
     });
     this.userPrediction.matchQuestions = this.matchQuestionArray;
     
-    this.matchService.submitPredictionQuest(this.userPrediction);
+    this.matchService.submitPredictionQuestByUser(this.userPrediction);
+    sessionStorage.setItem('questSessionInprogress', 'false');
+    this.sendMessage('submitted');
+    this.router.navigateByUrl('/wcpredict/dashboard');
+    // window.location.href = "/wcpredict/dashboard";
+  }
+
+  onSave() {
+    // TODO: Use EventEmitter with form value
+    this.matchQuestionArray.forEach(element => {
+      if (element.question.category == 4 && element.answer != "") {
+        element.answer = this.winMarginType + "_" + element.answer
+      }
+      
+      console.log(element);
+      console.log(this.winMarginType);
+    });
+    this.userPrediction.matchQuestions = this.matchQuestionArray;
+    
+    this.matchService.savePredictionQuest(this.userPrediction);
     sessionStorage.setItem('questSessionInprogress', 'false');
     this.sendMessage('submitted');
     this.router.navigateByUrl('/wcpredict/dashboard');

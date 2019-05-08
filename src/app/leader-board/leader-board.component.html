@@ -3,26 +3,25 @@
       <h5 class="card-title">Leaderboard</h5>
     </span><span class="div-right"><a href="#"><img src="../../assets/refresh1.png" style="border-radius: 50%;"
           (click)="updateMatchList()"></a></span></div>
-  
-    <div class="card-body bg-dark" style="border-radius: .5rem; height: calc(90vh - 123px);">
-        <div class="table-responsive">
-            <table class="table">
+
+  <div class="card-body bg-dark" style="border-radius: .5rem; height: calc(90vh - 123px);">
+    <div class="table-responsive">
+      <table class="table">
         <thead>
           <tr>
             <th>Place</th>
             <th style="width: 70%;">Name</th>
             <th>Played</th>
             <th>Points</th>
-          </tr> 
+          </tr>
         </thead>
         <tbody style="width: 100%;">
-          <tr *ngFor="let item of leaderboardDataArray">
-              <td>{{item.rank}}</td>
-              <td style="width: 70%">{{item.username}}</td>
-              <td style="text-align: right">{{item.matchCount}}</td>
-              <td style="width: 50%; text-align: right">{{item.score}}</td>
+          <tr *ngFor="let item of userArray">
+            <td>{{item.rank==0? '-' : item.rank}}</td>
+            <td style="width: 70%">{{item.firstName}}</td>
+            <td style="text-align: right">{{item.noOfMatchPlayed}}</td>
+            <td style="width: 50%; text-align: right">{{item.overallPoints}}</td>
           </tr>
-          
         </tbody>
       </table>
     </div>

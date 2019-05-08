@@ -3,10 +3,10 @@
   <!-- Nav pills -->
   <ul class="nav nav-pills justify-content-center" role="tablist"
     style="border-radius: .3rem; background-color: rgb(212, 240, 110);">
-    <li class="nav-item">
+    <li *ngIf="userType!='admin'" class="nav-item">
       <a class="nav-link px-2" data-toggle="pill" href="#played">RECENT</a>
     </li>
-    <li class="nav-item">
+    <li *ngIf="userType!='admin'" class="nav-item">
       <a class="nav-link px-2 active" data-toggle="pill" href="#upcoming">UPCOMING</a>
     </li>
     <li class="nav-item">
@@ -22,29 +22,29 @@
   <!-- Tab panes -->
   <div class="tab-content" style="margin-top: 5px; ">
     <div id="played" class="container tab-pane scrollapply">
-      <div *ngIf="matchScheduleArray && matchScheduleArray.length > 0; else emptyPage"></div>
-      <div #matchPage *ngFor="let match of matchScheduleArray">
+      <div *ngIf="userMatches && userMatches.length > 0; else emptyPage"></div>
+      <div #matchPage *ngFor="let match of userMatches">
         <app-match-details menuType='completed' [matchDetails]="match"></app-match-details>
 
       </div>
     </div>
-    <div id="upcoming" class="container tab-pane active scrollapply">
-      <div *ngIf="matchScheduleArray && matchScheduleArray.length > 0; else emptyPage"></div>
-      <div #matchPage *ngFor="let match of matchScheduleArray">
+    <div id="upcoming" [class]="userType!='admin'?'container tab-pane active scrollapply':'container tab-pane scrollapply'">
+      <div *ngIf="overallMatches && overallMatches.length > 0; else emptyPage"></div>
+      <div #matchPage *ngFor="let match of overallMatches">
         <app-match-details menuType='ongoing' [matchDetails]="match"></app-match-details>
       </div>
     </div>
     
   <!-- <input type="text" class="form-control" [(ngModel)]='filterteamName' placeholder="Search Team ex: SA, IND" aria-label=""
     aria-describedby="basic-addon1"> -->
-    <div *ngIf="fixture.classList.contains('active')" style="padding-top: 3px;;padding-bottom: 3px;">
+    <div *ngIf="fixture.classList.contains('active')" style="padding-top: 3px; padding-bottom: 3px;">
       <input type="search" style="height: 25px;" [(ngModel)]='filterteamName' placeholder="Search Team" class="form-control" />
     </div>
           
          
-    <div #fixture id="fixture" class="container tab-pane scrollapply">
-      <div *ngIf="matchScheduleArray && matchScheduleArray.length > 0; else emptyPage"></div>
-      <div #matchPage *ngFor="let match of matchScheduleArray | filterFixtureByTeam: filterteamName">
+    <div #fixture id="fixture" [class]="userType=='admin'?'container tab-pane active scrollapply':'container tab-pane scrollapply'">
+      <div *ngIf="overallMatches && overallMatches.length > 0; else emptyPage"></div>
+      <div #matchPage *ngFor="let match of overallMatches | filterFixtureByTeam: filterteamName">
         <app-match-details menuType='fixture' [matchDetails]="match"></app-match-details>
       </div>
 

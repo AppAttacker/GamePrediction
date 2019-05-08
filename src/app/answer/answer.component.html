@@ -6,13 +6,16 @@
       <div class="card-body bg-dark text-white" style="margin-bottom: 13px; border-radius: .5rem;">
         <div>
           <div>
-            <label>Select match which you want to give answer:</label>
-            <input type="text" list="matchid" (onchange)="loadQuestions($event)" placeholder="Select Match"/>
+            <label>Select match to give final answer : </label>
+            <input type="search" list="matchid" [(ngModel)]='selectedMatch' name="matchlist" placeholder="Select Match"/>
             <datalist id="matchid">
               <option *ngFor="let match of matchScheduleArray">Match {{match.matchid}} - {{match.fromTeam.name}} Vs {{match.toTeam.name}}</option>
             </datalist>
+            <a class="btn btn-primary btn-sm" (click)="loadQuestions()" role="button">Go</a>
+            
           </div>
-        </div>
+
+        </div><hr>
         <div class="scrollapply" style="padding-top: 20px;">
           <div *ngFor="let question of matchQuestionArray; first as isFirst; last as isLast; index as i;" style="padding-bottom: 20px;">
             <!-- <img src="../../assets/images2.jpg" alt="Los Angeles"> -->
@@ -34,8 +37,6 @@
             </div>
             <div *ngIf='question.question.category==3' style="text-align: center">
               <!-- <input type="text" [(ngModel)]="question.answer" [name]='question.descript' /> -->
-              <input name='"range"+question.matchPredictionId' type="range" min="0" max="500"
-                [(ngModel)]="question.answer">
               <span style="padding-left: 20px;">
                 <input type="text" class="form-control-sm" [(ngModel)]="question.answer"
                   name='"answer"+question.matchPredictionId' style="padding-left: 5px; width: 10%">
@@ -45,7 +46,7 @@
               <input type="text" list="playerList" name='"playerOption"+question.matchPredictionId'
                 [(ngModel)]="question.answer" />
               <datalist class="ui-datalist-data" id="playerList">
-                <option *ngFor="let player of playerArray">{{player.fullName+"("+player.country.code+")"}}</option>
+                <option *ngFor="let player of playerArray">{{player.fullName}}</option>
               </datalist>
             </div>
             <div *ngIf='question.question.category==1' style="text-align: center">
@@ -53,14 +54,15 @@
               <input type="radio" id='"answer"+question.questionId' name='"answer"+question.questionId'><label for='"answer"+question.questionId'>two</label> -->
               <div class="btn-group row">
                 <label class="btn btn-secondary">
-                  <input type="radio" name="options" value="match.fromTeam.name" />
+                  <input type="radio" [name]='"answer"+question.question.questionId' id='"answer"+question.question.questionId+"from"' [value]='match.fromTeam.name' [(ngModel)]='question.answer' />
                   <span style="padding-left: 10px;">{{match.fromTeam.name}}</span>
                 </label>
                 <label class="btn btn-secondary" style="padding-left: 20px;">
-                  <input type="radio" name="options" value="match.toTeam.name" />
+                  <input type="radio" [name]='"answer"+question.question.questionId' id='"answer"+question.question.questionId+"to"' [value]='match.toTeam.name' [(ngModel)]='question.answer' />
                   <span style="padding-left: 10px;">{{match.toTeam.name}}</span>
                 </label>
               </div>
+
             </div>
           </div>
         </div>

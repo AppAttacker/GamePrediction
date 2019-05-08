@@ -14,16 +14,18 @@
       <div id="demo" class="carousel slide bg-dark"
         style="height: calc(81.5vh - 123px); color: rgb(240, 238, 167); text-align: center; border-radius: .5rem;"
         data-ride="carousel" data-interval="false">
-        <div style="text-align: left">match id: {{id}}
+        <div style="padding-top: 10px; padding-left: 50px; padding-right: 50px; color: rgb(166, 214, 247); font-size: medium">
+          <strong>Match# {{id}}</strong>
           <div class="d-flex justify-content-between">
             <div>
-
+              {{match.fromTeam.name}} <img class="" src='../../assets/flags/{{match.fromTeam.code|lowercase}}.png'> 
             </div>
-            <div>
-
+            <div class="text-middle"><br> Vs </div>
+            <div >
+              <img class="" src='../../assets/flags/{{match.toTeam.code|lowercase}}.png'> {{match.toTeam.name}}
             </div>
           </div>
-        </div>
+        </div><hr>
         <!-- Indicators -->
         <ul class="carousel-indicators">
           <li *ngFor="let question of matchQuestionArray;  first as isFirst; index as i;"
@@ -31,7 +33,7 @@
         </ul>
 
         <!-- The slideshow -->
-        <div class="container-fluid" style="margin-top: 10%">
+        <div class="container-fluid" style="margin-top: 7%">
           <div class="row">
             <div class="col-lg-12 col-sm-12">
               <div class="carousel-inner">
@@ -44,7 +46,7 @@
                     <!-- <input type="text" [(ngModel)]="question.answer" [name]='question.descript' /> -->
                     <span style="padding-right: 20px;">
                       <select class="browser-default custom-select" name="wintype" #winOption id="winOption"
-                        [(ngModel)]='winMarginType' (change)='question.answer=0' style="padding-left: 5px; width: 100px">
+                        [(ngModel)]='winMarginType' (change)='question.answer=0' style="padding-left: 5px; width: 80px">
                         <option value="R">Run</option>
                         <option value="W">Wicket</option>
                       </select>
@@ -61,11 +63,11 @@
                       [(ngModel)]="question.answer">
                     <span style="padding-left: 20px;">
                       <input type="text" class="form-control-sm" [(ngModel)]="question.answer"
-                        [name]='"answer"+question.question.questionId' style="padding-left: 5px; width: 10%">
+                        [name]='"answer"+question.question.questionId' style="padding-left: 5px; width: 60px">
                     </span>
                   </div>
                   <div *ngIf='question.question.category==2' style="text-align: center">
-                    <input type="text" list="playerList" [name]='"playerOption"+question.question.questionId'
+                    <input type="text" list="playerList" [name]='"playerOption"+question.question.questionId' placeholder="Select"
                       [(ngModel)]="question.answer" />
                     <datalist class="ui-datalist-data" id="playerList">
                       <option *ngFor="let player of playerArray">{{player.fullName}}</option>
@@ -102,7 +104,7 @@
       </div>
       <div class="btn-sm" style="text-align: right">
         <button type="button" class="btn btn-pill btn-warning btn-sm" (click)="closeSession()">Close</button>
-        <button type="button" [disabled]="!questionForm.dirty" class="btn btn-pill btn-primary btn-sm"
+        <button type="submit" [disabled]="!questionForm.dirty" class="btn btn-pill btn-primary btn-sm"
           (click)="closeSession()">Save changes</button>
         <button type="submit" [disabled]="!questionForm.dirty" class="btn btn-pill btn-success btn-sm">Submit
           changes</button>
