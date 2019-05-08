@@ -27,9 +27,13 @@
           <a class="btn btn-success btn-sm" [class.disabled]="remainDays>2 ? true: false"
             (click)="triggerQuestSection()" role="button">{{remTimer}}</a>
         </div>
-        <div *ngIf="(remainDays<3)">
+        <div class="d-none d-sm-block" *ngIf="(remainDays<3)">
           <a [className]="message=='inprogress'?'btn btn-danger btn-sm':'btn btn-success btn-sm'"
             [class.disabled]="remainDays>2 || message=='inprogress' ? true: false" (click)="triggerQuestSection()">START PREDICTION</a>
+        </div>
+        <div class="d-block d-sm-none" *ngIf="(remainDays<3)">
+          <a [className]="message=='inprogress'?'btn btn-danger btn-sm':'btn btn-success btn-sm'"
+            [class.disabled]="remainDays>2 || message=='inprogress' ? true: false" (click)="triggerQuestSectionInModal()">START PREDICTION</a>
 
         </div>
       </div>

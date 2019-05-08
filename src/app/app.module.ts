@@ -20,8 +20,17 @@ import { NumericDirective } from './directives/numeric.directive';
 import { BlockcopypasteDirective } from './directives/blockcopypaste.directive';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogService } from './service/confirm-dialog.service';
+import { QuestionaryModalComponent, NgbdModal1Content } from './questionary-modal/questionary-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WarningDialogComponent } from './warning-dialog/warning-dialog.component';
 
 @NgModule({
+  entryComponents: [
+    QuestionaryModalComponent,
+    ConfirmDialogComponent,
+    NgbdModal1Content,
+    WarningDialogComponent
+  ],
   declarations: [
     AppComponent,
     MatchScheduleComponent,
@@ -36,7 +45,10 @@ import { ConfirmDialogService } from './service/confirm-dialog.service';
     AnswerComponent,
     NumericDirective,
     BlockcopypasteDirective,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    QuestionaryModalComponent,
+    NgbdModal1Content,
+    WarningDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +56,8 @@ import { ConfirmDialogService } from './service/confirm-dialog.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
-    
+    RouterModule,
+    NgbModule
   ],
   
   providers: [IdleTimeOutService,ConfirmDialogService],

@@ -1,26 +1,16 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { ConfirmDialogService } from '../service/confirm-dialog.service';
+import { Component, OnInit} from '@angular/core';
+import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
   styleUrls: ['./confirm-dialog.component.css']
 })
-export class ConfirmDialogComponent implements OnInit {
-    @ViewChild('exampleModalCenter') el:ElementRef;
-    
-    modalWindow: any;
+export class ConfirmDialogComponent implements OnInit {   
 
-    constructor(private confirmDialogService: ConfirmDialogService ) { }  
+    constructor(private activeModal : NgbActiveModal ) { }  
   
-    ngOnInit() { 
-      // this.modalWindow = this;
-      this.confirmDialogService.add(this.el.nativeElement);
-      this.showDialog();
-    } 
-
-    showDialog(){
-      this.modalWindow.modal('show');
-    }
+    ngOnInit() {      
+    }   
 
 }

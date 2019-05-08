@@ -1,24 +1,25 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
-import { Question } from '../modal/question';
 import { MessageService } from '../service/message.service';
 import { MatchService } from '../service/match.service';
-import { UserPrediction } from '../modal/user-prediction';
 import { User } from '../modal/user';
 import { Match } from '../modal/match';
 import { Players } from '../modal/players';
 import { MatchQuestions } from '../modal/match-questions';
+import { UserPrediction } from '../modal/user-prediction';
+import { FormGroup, FormControl } from '@angular/forms';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { WarningDialogComponent } from '../warning-dialog/warning-dialog.component';
+
 
 @Component({
-  selector: 'app-questionary',
-  templateUrl: './questionary.component.html',
-  styleUrls: ['./questionary.component.css']
+  selector: 'app-questionary-modal',
+  templateUrl: './questionary-modal.component.html',
+  styleUrls: ['./questionary-modal.component.css']
 })
-export class QuestionaryComponent implements OnInit {
+export class QuestionaryModalComponent implements OnInit {
+
+  closeResult: string;
 
   winMarginType: string = "R";
   user: User;
@@ -33,25 +34,22 @@ export class QuestionaryComponent implements OnInit {
     question: new FormControl('Who will win this match:'),
     answer: new FormControl(''),
   });
-  
+
   questionList = [];
 
   id: any;
   username: string;
   userId: number;
-  // matchDetails: any;
 
-  constructor(private router: Router, 
-              private route: ActivatedRoute, 
-              private messageService: MessageService, 
-              private matchService: MatchService,
-              private modalService: NgbModal) { }
+  @Input() matchId : number;
+
+  constructor(private modalService: NgbModal, private activeModal : NgbActiveModal, private router: Router, private route: ActivatedRoute, private messageService: MessageService, private matchService: MatchService) {}
 
   ngOnInit() {
     console.log('inside question component');
     console.log(parseInt("100"));
     console.log(sessionStorage.getItem('userid'));
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.matchId;
     this.username = sessionStorage.getItem('username');
     this.userId = parseInt(sessionStorage.getItem('userid'));
     
@@ -89,7 +87,7 @@ export class QuestionaryComponent implements OnInit {
 
     });
   }
-
+ 
   onSubmit() {
     // TODO: Use EventEmitter with form value
     this.matchQuestionArray.forEach(element => {
@@ -105,6 +103,7 @@ export class QuestionaryComponent implements OnInit {
     this.matchService.submitPredictionQuestByUser(this.userPrediction);
     sessionStorage.setItem('questSessionInprogress', 'false');
     this.sendMessage('submitted');
+    this.activeModal.close();
     this.router.navigateByUrl('/wcpredict/dashboard');
     // window.location.href = "/wcpredict/dashboard";
   }
@@ -155,11 +154,43 @@ export class QuestionaryComponent implements OnInit {
   closeSession() {
     sessionStorage.setItem('questSessionInprogress', 'false');
     this.sendMessage('closed');
-    this.router.navigate(['/wcpredict/dashboard']);
+    this.activeModal.close();
+    // this.router.navigate(['/wcpredict/dashboard']);
+  }
 
+  checkforvaluechange(){
+    alert("hi");
+    this.activeModal.dismiss('Cross click');
   }
 
   valueChangeAlert(){
-    this.modalService.open(WarningDialogComponent);
+    this.modalService.open(NgbdModal1Content);
+  }  
+
+}
+
+@Component({
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title">Alert</h4>
+      <button type="button" class="close" aria-label="Close" (click)="alertActiveModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Identified Changes. Do you want to continue without save ?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="alertActiveModal.close('Close click')">No</button>
+      <button type="button" class="btn btn-outline-dark" (click)="valueChangeAlertConfirm();">Yes</button>
+    </div>
+  `
+})
+export class NgbdModal1Content {
+  constructor(private modalService: NgbModal, public alertActiveModal: NgbActiveModal) {}
+  
+  valueChangeAlertConfirm(){
+    sessionStorage.setItem('questSessionInprogress', 'false');
+    this.modalService.dismissAll();
   }
 }

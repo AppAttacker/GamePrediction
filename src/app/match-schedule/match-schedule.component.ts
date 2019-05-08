@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatchService } from '../service/match.service';
 import { Match } from '../modal/match';
 import { MatchDetails } from '../modal/match-details';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-match-schedule',
@@ -13,7 +15,7 @@ export class MatchScheduleComponent implements OnInit  {
   filterteamName: string;
   userType: string;
 
-  constructor(private matchService: MatchService) { 
+  constructor(private matchService: MatchService,private modalService : NgbModal) { 
     console.log("inside MatchScheduleComponent");
   }
 
@@ -41,7 +43,8 @@ export class MatchScheduleComponent implements OnInit  {
   }
   updateMatchList(){
     if (sessionStorage.getItem('questSessionInprogress') == 'true') {
-      alert('Please Save/Submit your current question session');
+      // alert('Please Save/Submit your current question session');
+      this.modalService.open(ConfirmDialogComponent);
     }else{
       this.getMatchList();
     }

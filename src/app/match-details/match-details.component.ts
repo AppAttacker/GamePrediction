@@ -4,6 +4,9 @@ import { MessageService } from '../service/message.service';
 import { Subscription } from 'rxjs';
 import { Match } from '../modal/match';
 import { ConfirmDialogService } from '../service/confirm-dialog.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { QuestionaryModalComponent } from '../questionary-modal/questionary-modal.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 // const secondsCounter = interval(1000);
 
@@ -27,7 +30,11 @@ export class MatchDetailsComponent implements OnInit {
   userType: string;
   userScore: number;
 
-  constructor(private router: Router, public route: ActivatedRoute, private messageService: MessageService,private confirmDialogService: ConfirmDialogService) {
+  constructor(private router: Router, 
+              public route: ActivatedRoute, 
+              private messageService: MessageService,
+              private confirmDialogService: ConfirmDialogService, 
+              private modalService : NgbModal) {
       this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message.text; });
       this.message = sessionStorage.getItem('questSessionInprogress');
    }
@@ -58,7 +65,8 @@ export class MatchDetailsComponent implements OnInit {
   triggerQuestSection(){
     
     if(sessionStorage.getItem('questSessionInprogress')=='true'){
-      alert('Please Save/Submit your current question session');
+      // alert('Please Save/Submit your current question session');
+      this.modalService.open(ConfirmDialogComponent);
       return false;
     }else{
       this.inProgress = true;
@@ -70,7 +78,8 @@ export class MatchDetailsComponent implements OnInit {
 
   triggerMatchDetail(){
     if(sessionStorage.getItem('questSessionInprogress')=='true'){
-      alert('Please Save/Submit your current question session');
+      // alert('Please Save/Submit your current question session');
+      this.modalService.open(ConfirmDialogComponent);
     }else{
       alert("match details");
     }
@@ -89,5 +98,14 @@ export class MatchDetailsComponent implements OnInit {
     // Display the result in the element with id="demo"
     this.remainDays = days;
     this.remTimer = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  }
+
+  triggerQuestSectionInModal() {
+    const modalref = this.modalService.open(QuestionaryModalComponent, {
+      backdrop: 'static',
+      size: 'lg',
+      keyboard: false
+    });
+    modalref.componentInstance.matchId = this.matchDetails.matchid;
   }
 }

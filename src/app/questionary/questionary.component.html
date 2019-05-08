@@ -103,9 +103,9 @@
 
       </div>
       <div class="btn-sm" style="text-align: right">
-        <button type="button" class="btn btn-pill btn-warning btn-sm" (click)="closeSession()">Close</button>
+        <button type="button" class="btn btn-pill btn-warning btn-sm" (click)="(questionForm.dirty)?valueChangeAlert():closeSession();">Close</button>
         <button type="submit" [disabled]="!questionForm.dirty" class="btn btn-pill btn-primary btn-sm"
-          (click)="closeSession()">Save changes</button>
+          (click)="onSave()">Save changes</button>
         <button type="submit" [disabled]="!questionForm.dirty" class="btn btn-pill btn-success btn-sm">Submit
           changes</button>
       </div>

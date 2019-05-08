@@ -1,6 +1,9 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionaryComponent } from '../questionary/questionary.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { QuestionaryModalComponent } from '../questionary-modal/questionary-modal.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +17,7 @@ export class DashboardComponent implements OnInit {
   username: string;
   private routedComponent: QuestionaryComponent;
   
-  constructor(private router: Router, public route: ActivatedRoute) { }
+  constructor(private router: Router, public route: ActivatedRoute, private modalService : NgbModal) { }
 
   ngOnInit() {
     this.username = sessionStorage.getItem('username');
@@ -42,9 +45,18 @@ export class DashboardComponent implements OnInit {
   showAnswerProvider(){
     // this.router.navigate(['answerPage']);
     if (sessionStorage.getItem('questSessionInprogress') == 'true') {
-      alert('Please Save/Submit your current question session');
+      // alert('Please Save/Submit your current question session');
+      this.modalService.open(ConfirmDialogComponent);
     }else{
       this.router.navigate([ 'answerPage'], { relativeTo: this.route });
     }
+  }
+
+  openModal() {
+    this.modalService.open(QuestionaryModalComponent, {
+      backdrop: 'static',
+      size: 'lg',
+      keyboard: false
+  });
   }
 }
