@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { User } from '../modal/user';
 import { Observable } from 'rxjs';
+import { Register } from '../modal/register';
+import { Login } from '../modal/login';
 
 interface Alert {
   type: string;
@@ -16,6 +18,12 @@ export class AuthenticationService {
 
   alert : Alert = {type : '', message : ''};
 
+  hostURL: string ='localhost';
+
+  registrationUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/user/register';
+  loginUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/user/login';
+  pingUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/user/ping';
+
   constructor(private http: HttpClient) { }
 
   setMessage(message, type){
@@ -27,7 +35,7 @@ export class AuthenticationService {
     return this.alert;
   }
 
-  login(username: string, password: string) : Observable<User> {
+  login(loginObject : Login) : Observable<User> {
     // return this.http.post<any>(`/users/authenticate`, { username: username, password: password })
     //   .pipe(map(user => {
     //       if (user) {
@@ -37,15 +45,34 @@ export class AuthenticationService {
     //       }
     //       return user;
     //   }));
-    sessionStorage.setItem('userloggedIn','true');
-    sessionStorage.setItem('userid','1');
-    sessionStorage.setItem('username',username);
-    sessionStorage.setItem('rank',"15");
-    sessionStorage.setItem('userType',"participant");
-    return null;
+    return this.http.post<User>(this.loginUrl, loginObject)
+      .pipe(map(user => {
+        if(user) {
+          let rank : string;
+          sessionStorage.setItem('userloggedIn','true');
+          sessionStorage.setItem('userid', user.userId.toLocaleString());
+          sessionStorage.setItem('username',user.userName);
+          if(user.rank){
+            rank = user.rank.toLocaleString();
+          }
+          sessionStorage.setItem('rank',rank);
+          sessionStorage.setItem('userType',user.userType);
+        }
+        return user;
+      }));
+    // sessionStorage.setItem('userloggedIn','true');
+    // sessionStorage.setItem('userid','1');
+    // sessionStorage.setItem('username',username);
+    // sessionStorage.setItem('rank',"15");
+    // sessionStorage.setItem('userType',"participant");
+    // return null;
   }
 
-  register(user: User) {
-    return this.http.post(`/users/register`, user);
+  register(register: Register) : Observable<string> {
+    return this.http.post(this.registrationUrl, register, {responseType: 'text'});
+  }
+
+  verifyApplicationStatus() : Observable<string> {
+    return this.http.get(this.pingUrl, {responseType: 'text'});        
   }
 }
