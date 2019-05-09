@@ -13,14 +13,17 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 export class DashboardComponent implements OnInit {
 
   title = 'GamePrediction';
-  admin = "admin_1";
+  admin: string;
   username: string;
+  rank: number;
   private routedComponent: QuestionaryComponent;
   
   constructor(private router: Router, public route: ActivatedRoute, private modalService : NgbModal) { }
 
   ngOnInit() {
-    this.username = sessionStorage.getItem('username');
+    this.username = sessionStorage.getItem('fistname');
+    this.admin = sessionStorage.getItem('userType');
+    this.rank = parseInt(sessionStorage.getItem('rank'));
     console.log('inside dashboard..');
     if(this.username==null){
       this.router.navigateByUrl('/wcpredict');

@@ -40,15 +40,17 @@ export class MatchScheduleComponent implements OnInit {
 
   getMatchList() {
     const userMatchObserve = this.matchService.getMatchScheduleList(1);
-    userMatchObserve.subscribe((matchDetail: MatchDetails) => {
+    userMatchObserve.subscribe((matchDetail: Match[]) => {
       // this.userMatches = matchDetail.userMatches;
-      this.overallMatches = matchDetail.overallMatches;
+      this.overallMatches = matchDetail;
       // this.matchToBePlay = this.overallMatches;
       console.log("getting overall matches..");
+      var count = 0;
       this.overallMatches.forEach(match => {
         if (this.userPlayedMatchArray.indexOf(match.matchid) ==-1) {
-          this.matchToBePlay.push(match);
-          console.log(match);
+          if(count++<7){
+            this.matchToBePlay.push(match);
+          }
         }
                 
       });
@@ -72,24 +74,16 @@ export class MatchScheduleComponent implements OnInit {
   }
 
   updateMatchList() {
-    // this.userMatches = [];
-    this.userMatchArray = [];
-    this.overallMatches = [];
-    this.matchToBePlay = [];
-
-    this.userMatchArray = [];
     if (sessionStorage.getItem('questSessionInprogress') == 'true') {
       // alert('Please Save/Submit your current question session');
       this.modalService.open(ConfirmDialogComponent);
     } else {
+      this.userMatchArray = [];
+      this.overallMatches = [];
+      this.matchToBePlay = [];
+      this.userMatchArray = [];
       this.getUserDashboardData();
       this.getMatchList();
-      console.log(this.userMatchArray.length);
-
-      console.log(this.userMatchArray);
-      console.log(this.overallMatches);
-      console.log("test2222");
-      console.log(this.matchToBePlay);
     }
     return false;
   }

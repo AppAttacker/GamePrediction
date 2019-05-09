@@ -28,7 +28,7 @@
 
       </div>
     </div>
-    <div id="upcoming" [class]="userType!='admin'?'container tab-pane active scrollapply':'container tab-pane scrollapply'">
+    <div #upcoming id="upcoming" [class]="userType!='admin'?'container tab-pane active scrollapply':'container tab-pane scrollapply'">
       <div *ngIf="matchToBePlay && matchToBePlay.length > 0; else emptyPage"></div>
       <div #matchPage *ngFor="let match of matchToBePlay">
         <app-match-details menuType='ongoing' [matchDetails]="match"></app-match-details>
@@ -59,6 +59,7 @@
     <ng-template #emptyPage>
       No Data Exist...
     </ng-template>
-
+    
+    <div style="color: rgb(150, 13, 31); font-size: x-small" *ngIf="upcoming.classList.contains('active')"><br>*You can see only 7 or less upcoming matches..</div>
   </div>
 </div>

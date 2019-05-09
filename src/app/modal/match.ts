@@ -6,4 +6,5 @@ export class Match {
     fromTeam: Country;
     toTeam: Country;
     venue: string;
+    matchResult: string;
 }

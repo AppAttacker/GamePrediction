@@ -25,6 +25,7 @@ export class MatchDetailsComponent implements OnInit {
   todate: number = Date.parse("2019-05-30T09:30:00.000+0000");
   distance: number;
   remTimer: string;
+  seconds: number;
   remainDays: number; 
   inProgress: boolean;
   message: string;
@@ -107,6 +108,7 @@ export class MatchDetailsComponent implements OnInit {
     // Display the result in the element with id="demo"
     this.remainDays = days;
     this.remTimer = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    this.seconds = seconds;
   }
 
   triggerQuestSectionInModal() {

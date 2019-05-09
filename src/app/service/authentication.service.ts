@@ -52,6 +52,7 @@ export class AuthenticationService {
           sessionStorage.setItem('userloggedIn','true');
           sessionStorage.setItem('userid', user.userId.toLocaleString());
           sessionStorage.setItem('username',user.userName);
+          sessionStorage.setItem('fistname',user.firstName);
           if(user.rank){
             rank = user.rank.toLocaleString();
           }

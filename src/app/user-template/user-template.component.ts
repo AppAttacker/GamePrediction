@@ -17,7 +17,7 @@ export class UserTemplateComponent implements OnInit {
   userDashoard: UserDashboard; 
   totMatchPlayed: number;
   totScore: number = 0;
-  rank: string;
+  rank: number;
   chartDataArray: ChartData[] = [];
   chartData: ChartData;
   chart: any;
@@ -31,7 +31,7 @@ export class UserTemplateComponent implements OnInit {
       this.router.navigate([ 'answerPage'], { relativeTo: this.route });
     }
     this.getUserDashboardData();
-    this.rank = sessionStorage.getItem("rank");
+    this.rank = parseInt( sessionStorage.getItem("rank"));
 
     // this.setChartData();
     

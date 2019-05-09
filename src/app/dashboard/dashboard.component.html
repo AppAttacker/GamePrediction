@@ -4,11 +4,11 @@
     <div class="col-lg-3 col-sm-3"
       style="margin-left: 25px; margin-right: 25px; background-color: rgb(206, 203, 203); border-radius: 1rem;">
       <div class="row">
-        <div class="col-lg-3 col-sm-3 display-3 div-left" style="width: 35%"><img src="../assets/cricket1.png"></div>
-        <div class="col-lg-8 col-sm-8 text-dark div-right" style="text-align: left;width: 60%;">
-          <div class="px-3" style="padding-top: 30px; text-align: left;">
-            <h6><strong>Hi {{username}}..</strong></h6>
-            Your rank: 31
+        <div class="col-lg-3 col-sm-1 display-3 div-left" style="width: 35%"><img src="../assets/cricket1.png"></div>
+        <div class="col-lg-8 col-sm-10 text-dark div-right" style="text-align: left;width: 60%;">
+          <div class="px-0" style="padding-top: 20px; text-align: left; font-size: medium">
+            <strong>Hi {{username}}..</strong><hr>
+          Your rank: {{rank==0? '-' : rank}}
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="col-lg-2 col-sm-2 mt-auto">
-      <div *ngIf="admin=='admin_1'">
+      <div *ngIf="admin=='admin'">
         <div class="btn-group div-left" style="border-radius: 1rem;">
           <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">

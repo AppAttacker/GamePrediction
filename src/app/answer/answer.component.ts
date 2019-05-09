@@ -16,6 +16,7 @@ import { MatchDetails } from '../modal/match-details';
 export class AnswerComponent implements OnInit {
 
   winMarginType: string = "R";
+  matchResult: string;
   user: User;
   match: Match;
   player: Players;
@@ -77,7 +78,7 @@ export class AnswerComponent implements OnInit {
   getMatchList(){
     return this.matchService.getMatchScheduleList(this.userId).subscribe(
         // matchObj => this.matchList = matchObj
-        matchObj => this.matchScheduleArray = matchObj.overallMatches
+        matchObj => this.matchScheduleArray = matchObj
     );
   }
 
@@ -91,6 +92,7 @@ export class AnswerComponent implements OnInit {
       console.log(element);
       console.log(this.winMarginType);
     });
+    this.userPrediction.match.matchResult = this.matchResult;
     this.userPrediction.matchQuestions = this.matchQuestionArray;
     
     this.matchService.submitPredictionQuestByAdmin(this.userPrediction);

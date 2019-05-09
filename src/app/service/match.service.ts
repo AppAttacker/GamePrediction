@@ -31,14 +31,20 @@ export class MatchService {
 
   userDashgboardUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/userdashboard';
   leaderBoardUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/leaderdashboard';
-  // matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchfixture';
-  matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchdetails';
+  matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchfixture';
+  // matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchdetails';
 
 
-  getMatchScheduleList(userId: number): Observable<MatchDetails> {
+  // getMatchScheduleList(userId: number): Observable<MatchDetails> {
+  //   // return this.http.get<IMatchDetails[]>(this.restURL);
+  //   const params = new HttpParams().set('userId', userId+"");
+  //   return this.http.get<MatchDetails>(this.matchScheduleUrl,{params});
+  // }
+
+  getMatchScheduleList(userId: number): Observable<Match[]> {
     // return this.http.get<IMatchDetails[]>(this.restURL);
-    const params = new HttpParams().set('userId', "1");
-    return this.http.get<MatchDetails>(this.matchScheduleUrl,{params});
+    const params = new HttpParams().set('userId', userId+"");
+    return this.http.get<Match[]>(this.matchScheduleUrl,{params});
   }
 
   getPredictionQuest(userId: number, matchId: number): Observable<UserPrediction> {
@@ -88,7 +94,7 @@ export class MatchService {
 
   getUserDashboard(userid: string): Observable<UserDashboard[]> {
     console.log("inside getUserDashboard...");
-    const params = new HttpParams().set('userId', "1");
+    const params = new HttpParams().set('userId', userid);
     return this.http.get<UserDashboard[]>(this.userDashgboardUrl, { params })
   }
 
