@@ -10,8 +10,14 @@
         {{matchDetails.fromTeam.name}} Vs <img class="" src='../../assets/flags/{{matchDetails.toTeam.code|lowercase}}.png'>
         {{matchDetails.toTeam.name}}
       </div>
-      <div style="padding-top: 10px;">Date: {{matchDetails.startTime | date: 'dd MMM yyyy hh:mm:ss a'}}</div>
 
+      <div *ngIf='menuType=="completed"' style="padding-top: 10px;">Date: {{matchDetails.startTime | date: 'dd MMM yyyy'}}</div>
+      <div *ngIf='menuType=="ongoing" || menuType=="fixture"' style="padding-top: 10px;">Date: {{matchDetails.startTime | date: 'dd MMM yyyy hh:mm:ss a'}}</div>
+      
+      <div *ngIf='menuType=="fixture"'>
+        <br>
+        Venue : {{matchDetails.venue}}
+      </div>
       <hr>
       <div *ngIf='menuType=="completed"' class="btn-sm" style=" font-size: small; color: white;">
         <!-- <div *ngIf="remainDays>2">
