@@ -1,1 +1,4 @@
 <router-outlet></router-outlet>
+<!-- Loadersection, loader will be visible whenever http call happeing -->
+<app-loader-page [hidden]="!HTTPActivity"></app-loader-page>
+

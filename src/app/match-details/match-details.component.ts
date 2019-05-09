@@ -7,6 +7,8 @@ import { ConfirmDialogService } from '../service/confirm-dialog.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionaryModalComponent } from '../questionary-modal/questionary-modal.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { UserDashboard } from '../modal/user-dashboard';
+import { MatchDetails } from '../modal/match-details';
 
 // const secondsCounter = interval(1000);
 
@@ -46,6 +48,9 @@ export class MatchDetailsComponent implements OnInit {
   matchDetails: Match;
 
   @Input()
+  userMatchDetails: UserDashboard;
+
+  @Input()
   menuType: string;
 
   ngOnInit() {
@@ -55,6 +60,10 @@ export class MatchDetailsComponent implements OnInit {
       this.getDateCountDown(); 
       }, 1000);
       this.userScore = parseInt(sessionStorage.getItem('userScore'));
+      if(this.menuType=='completed'){
+        this.matchDetails = this.userMatchDetails.match;
+      }
+    
   }
   
   ngOnDestroy() {

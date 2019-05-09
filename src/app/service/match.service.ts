@@ -29,8 +29,8 @@ export class MatchService {
   questionSubmitUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/submitDetails';
   questionAdminSubmitUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/submitfinalanswer';
 
-  userdashgboardUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/userdashboard';
-  leaderUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/leaderdashboard';
+  userDashgboardUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/userdashboard';
+  leaderBoardUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/leaderdashboard';
   // matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchfixture';
   matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchdetails';
 
@@ -89,12 +89,12 @@ export class MatchService {
   getUserDashboard(userid: string): Observable<UserDashboard[]> {
     console.log("inside getUserDashboard...");
     const params = new HttpParams().set('userId', "1");
-    return this.http.get<UserDashboard[]>(this.userdashgboardUrl, { params })
+    return this.http.get<UserDashboard[]>(this.userDashgboardUrl, { params })
   }
 
   getLeaderboard() {
     console.log("inside getLeaderboard...");
-    return this.http.get<User[]>(this.leaderUrl);
+    return this.http.get<User[]>(this.leaderBoardUrl);
   }
   
 }

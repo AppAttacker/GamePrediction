@@ -7,8 +7,8 @@
       <hr>
       <div>
         <img class="" src='../../assets/flags/{{matchDetails.fromTeam.code|lowercase}}.png'>
-        {{matchDetails.fromTeam.name}} Vs {{matchDetails.toTeam.name}}
-        <img class="" src='../../assets/flags/{{matchDetails.toTeam.code|lowercase}}.png'>
+        {{matchDetails.fromTeam.name}} Vs <img class="" src='../../assets/flags/{{matchDetails.toTeam.code|lowercase}}.png'>
+        {{matchDetails.toTeam.name}}
       </div>
       <div style="padding-top: 10px;">Date: {{matchDetails.startTime | date: 'dd MMM yyyy hh:mm:ss a'}}</div>
 
@@ -19,7 +19,7 @@
             (click)="triggerQuestSection()" role="button">{{remTimer}}</a>
         </div> -->
         <div>
-          Your score : {{userScore}}
+          Your score : {{userMatchDetails.points}}
         </div>
       </div>
       <div *ngIf='menuType=="ongoing"' class="btn-sm" style=" font-size: small; color: white;">

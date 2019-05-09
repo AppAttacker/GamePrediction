@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatchScheduleComponent } from './match-schedule/match-schedule.component';
 import { MatchDetailsComponent } from './match-details/match-details.component';
-import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
 import { UserTemplateComponent } from './user-template/user-template.component';
 import { LeaderBoardComponent } from './leader-board/leader-board.component';
 import { QuestionaryComponent } from './questionary/questionary.component';
@@ -23,6 +23,12 @@ import { ConfirmDialogService } from './service/confirm-dialog.service';
 import { QuestionaryModalComponent, NgbdModal1Content } from './questionary-modal/questionary-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WarningDialogComponent } from './warning-dialog/warning-dialog.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTPListener, HTTPStatus } from './httpstatus';
+import { LoaderPageComponent } from './loader/loader-page/loader-page.component';
+
+
+const RxJS_Services = [HTTPListener, HTTPStatus];
 
 @NgModule({
   entryComponents: [
@@ -48,7 +54,8 @@ import { WarningDialogComponent } from './warning-dialog/warning-dialog.componen
     ConfirmDialogComponent,
     QuestionaryModalComponent,
     NgbdModal1Content,
-    WarningDialogComponent
+    WarningDialogComponent,
+    LoaderPageComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +67,14 @@ import { WarningDialogComponent } from './warning-dialog/warning-dialog.componen
     NgbModule
   ],
   
-  providers: [IdleTimeOutService,ConfirmDialogService],
+  providers: [IdleTimeOutService,ConfirmDialogService,
+                RxJS_Services,
+                {
+                  provide: HTTP_INTERCEPTORS,
+                  useClass: HTTPListener,
+                  multi: true
+                }  
+              ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
