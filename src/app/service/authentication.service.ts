@@ -19,6 +19,7 @@ export class AuthenticationService {
   alert : Alert = {type : '', message : ''};
 
   hostURL: string ='localhost';
+  // hostURL: string ='10.252.52.157';
 
   registrationUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/user/register';
   loginUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/user/login';
@@ -36,27 +37,15 @@ export class AuthenticationService {
   }
 
   login(loginObject : Login) : Observable<User> {
-    // return this.http.post<any>(`/users/authenticate`, { username: username, password: password })
-    //   .pipe(map(user => {
-    //       if (user) {
-    //           sessionStorage.setItem('userloggedIn','true');
-    //           sessionStorage.setItem('userid','karth2k');
-    //           sessionStorage.setItem('username','Karthik');
-    //       }
-    //       return user;
-    //   }));
     return this.http.post<User>(this.loginUrl, loginObject)
       .pipe(map(user => {
         if(user) {
           let rank : string;
           sessionStorage.setItem('userloggedIn','true');
-          sessionStorage.setItem('userid', user.userId.toLocaleString());
+          sessionStorage.setItem('userid', String(user.userId));
           sessionStorage.setItem('username',user.userName);
           sessionStorage.setItem('fistname',user.firstName);
-          if(user.rank){
-            rank = user.rank.toLocaleString();
-          }
-          sessionStorage.setItem('rank',rank);
+          sessionStorage.setItem('rank',String(user.rank));
           sessionStorage.setItem('userType',user.userType);
         }
         return user;

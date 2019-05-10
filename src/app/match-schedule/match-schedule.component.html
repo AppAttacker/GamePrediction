@@ -60,6 +60,6 @@
       No Data Exist...
     </ng-template>
     
-    <div style="color: rgb(150, 13, 31); font-size: x-small" *ngIf="upcoming.classList.contains('active')"><br>*You can see only 7 or less upcoming matches..</div>
+    <div [hidden]="!upcoming.classList.contains('active')" style="color: rgb(150, 13, 31); font-size: x-small"><br>*You can see only 7 or less upcoming matches..</div>
   </div>
 </div>

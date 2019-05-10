@@ -14,15 +14,15 @@
       <div id="demo" class="carousel slide bg-dark"
         style="height: calc(81.5vh - 123px); color: rgb(240, 238, 167); text-align: center; border-radius: .5rem;"
         data-ride="carousel" data-interval="false">
-        <div style="padding-top: 10px; padding-left: 50px; padding-right: 50px; color: rgb(166, 214, 247); font-size: medium">
-          <strong>Match# {{id}}</strong>
-          <div class="d-flex justify-content-between">
+        <div style="padding-top: 10px; padding-left: 50px; padding-right: 50px; color: #5da6e6; font-size: medium">
+            <strong>Match# {{id}}</strong>
+          <div class="d-flex justify-content-between" style="color: #c0dffa;">
             <div>
-              {{match.fromTeam.name}} <img class="" src='../../assets/flags/{{match.fromTeam.code|lowercase}}.png'> 
+              {{match?.fromTeam.name}} <img src='../../assets/flags/{{match?.fromTeam.code|lowercase}}.png'> 
             </div>
-            <div class="text-middle"><br> Vs </div>
+            <div class="text-middle"><br><span style="font-size: small"> Vs </span></div>
             <div >
-              <img class="" src='../../assets/flags/{{match.toTeam.code|lowercase}}.png'> {{match.toTeam.name}}
+              <img src='../../assets/flags/{{match?.toTeam.code|lowercase}}.png'> {{match?.toTeam.name}}
             </div>
           </div>
         </div><hr>

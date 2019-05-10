@@ -34,6 +34,7 @@ export class AnswerComponent implements OnInit {
   username: string;
   userId: number;
   selectedMatch: string;
+  isSummaryVisible: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private matchService: MatchService) { }
 
@@ -71,6 +72,7 @@ export class AnswerComponent implements OnInit {
           console.log(element);
           console.log(this.winMarginType);
         });
+        this.isSummaryVisible = this.userPrediction.matchQuestions.length>0
       });
     }
   }

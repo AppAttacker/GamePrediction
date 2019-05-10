@@ -19,3 +19,15 @@ img{
         float:right;
         padding-right:10px;
     }
+
+    .labeltitle{
+        font-size: small; 
+        color: rgb(188, 155, 219);
+    }
+    .labeltxt{
+        font-size: small; 
+        color: rgb(233, 222, 243);
+    }
+    .teamnames{
+
+    }

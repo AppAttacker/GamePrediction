@@ -72,7 +72,7 @@ export class QuestionaryComponent implements OnInit {
       this.playerArray = userPrediction.players;
       this.matchQuestionArray = userPrediction.matchQuestions;
       this.userPrediction.matchQuestions.forEach(element => {
-        if (element.question.category == 4 && element.answer != "") {
+        if (element.question.category == 4 && element.answer != "" && element.answer != null) {
           this.winMarginType = element.answer.split("_")[0];
           element.answer = element.answer.split("_")[1];
           
