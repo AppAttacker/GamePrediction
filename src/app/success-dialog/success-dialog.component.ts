@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogService } from '../service/confirm-dialog.service';
 import { Router } from '@angular/router';
 import { MessageService } from '../service/message.service';
@@ -23,7 +23,8 @@ export class SuccessDialogComponent implements OnInit {
   constructor(private activeModal : NgbActiveModal, 
         private confirmDialog: ConfirmDialogService, 
         private router: Router, 
-        private messageService: MessageService) { }
+        private messageService: MessageService,
+        private modalService: NgbModal) { }
 
   ngOnInit() {
 
@@ -40,7 +41,8 @@ export class SuccessDialogComponent implements OnInit {
   }
 
   closePopup(){
-    this.activeModal.close('Cross click');
+    // this.activeModal.close('Cross click');
+    this.modalService.dismissAll();
     this.confirmDialog.clearMessage();
     sessionStorage.setItem('questSessionInprogress', 'false');
     this.sendMessage('saved');
