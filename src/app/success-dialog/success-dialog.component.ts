@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogService } from '../service/confirm-dialog.service';
 import { Router } from '@angular/router';
 import { MessageService } from '../service/message.service';
+import { MatchScheduleComponent } from '../match-schedule/match-schedule.component';
 
 interface Alert {
   type: string;
@@ -19,6 +20,8 @@ export class SuccessDialogComponent implements OnInit {
   title: string;
   message: string;
   alert : Alert;
+
+  @Input() scheduleComp : MatchScheduleComponent;
 
   constructor(private activeModal : NgbActiveModal, 
         private confirmDialog: ConfirmDialogService, 
@@ -47,6 +50,7 @@ export class SuccessDialogComponent implements OnInit {
     sessionStorage.setItem('questSessionInprogress', 'false');
     this.sendMessage('saved');
     this.router.navigateByUrl('/wcpredict/dashboard');
+    this.scheduleComp.ngOnInit();
   }
 
 }
