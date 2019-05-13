@@ -26,6 +26,8 @@ export class MatchDetailsComponent implements OnInit {
   distance: number;
   remTimer: string;
   seconds: number;
+  hours: number;
+  days : number;
   remainDays: number; 
   inProgress: boolean;
   message: string;
@@ -109,6 +111,8 @@ export class MatchDetailsComponent implements OnInit {
     this.remainDays = days;
     this.remTimer = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
     this.seconds = seconds;
+    this.hours = hours;
+    this.days = days;
   }
 
   triggerQuestSectionInModal() {

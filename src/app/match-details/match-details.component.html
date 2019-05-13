@@ -1,4 +1,4 @@
-<div *ngIf='(menuType=="completed" || menuType=="fixture" || (menuType=="ongoing" && seconds>-1))'class="card text-white bg-dark" style="text-align: center; margin-bottom: 10px">
+<div *ngIf='(menuType=="completed" || menuType=="fixture" || (menuType=="ongoing" && hours >= 2 && seconds >-1))'class="card text-white bg-dark" style="text-align: center; margin-bottom: 10px">
   <div class="card-body" style="padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
     <div [className]="(remainDays < 3 && menuType=='ongoing')?'card-title div-left' : 'card-title'" style="color: rgb(200, 149, 248); font-size: 15px;"><strong>Match# {{matchDetails.matchid}}</strong>
     </div>
@@ -25,10 +25,13 @@
           <a class="btn btn-success btn-sm" [class.disabled]="remainDays>2 ? true: false"
             (click)="triggerQuestSection()" role="button">{{remTimer}}</a>
         </div> -->
-        <div>
-            <span class="div-left"><strong>Your score :</strong> {{userMatchDetails.points}}</span>
-            <span class="div-right"><a class="btn btn-secondary btn-sm" 
+        <div *ngIf="(matchDetails.matchResult)">
+            <span class="div-left pt-1"><strong>Your <br>Score :</strong> {{userMatchDetails.points}}</span>
+            <span class="div-right pb-2"><a class="btn btn-secondary btn-sm" 
                 (click)="gotoMatchDashboard()" role="button">View Winners</a></span>
+        </div>
+        <div *ngIf="!(matchDetails.matchResult)">
+          <span style="text-align: center"><strong>Result Not yet Announced</strong></span>          
         </div>
       </div>
       <div *ngIf='menuType=="ongoing"' class="btn-sm" style=" font-size: small; color: white;">

@@ -16,17 +16,17 @@ export class AppComponent {
   }
   
   ngOnInit() {
-    this.router.routeReuseStrategy.shouldReuseRoute = function(){
-      return false;
-    };
+    // this.router.routeReuseStrategy.shouldReuseRoute = function(){
+    //   return false;
+    // };
   
-    this.router.events.subscribe((evt) => {
-      console.log(evt);
-        if (evt instanceof NavigationEnd) {
-            this.router.navigated = false;
-            window.scrollTo(0, 0);
-        }
-    });
+    // this.router.events.subscribe((evt) => {
+    //   console.log(evt);
+    //     if (evt instanceof NavigationEnd) {
+    //         this.router.navigated = false;
+    //         window.scrollTo(0, 0);
+    //     }
+    // });
   }
 
  }

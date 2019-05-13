@@ -98,7 +98,7 @@ export class QuestionaryComponent implements OnInit {
   onSubmit() {
     // TODO: Use EventEmitter with form value
     this.matchQuestionArray.forEach(element => {
-      if (element.question.category == 4 && element.answer != "") {
+      if (element.question.category == 4 && element.answer != "" && element.answer != null) {
         element.answer = this.winMarginType + "_" + element.answer
       }
       
@@ -130,7 +130,7 @@ export class QuestionaryComponent implements OnInit {
   onSave() {
     // TODO: Use EventEmitter with form value
     this.matchQuestionArray.forEach(element => {
-      if (element.question.category == 4 && element.answer != "") {
+      if (element.question.category == 4 && element.answer != "" && element.answer != null) {
         element.answer = this.winMarginType + "_" + element.answer
       }
       

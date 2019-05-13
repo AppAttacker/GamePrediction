@@ -4,4 +4,5 @@ export class MatchDashboard {
     participationId: number;
     user: User;
     points: number;
+    rank: number;
 }
