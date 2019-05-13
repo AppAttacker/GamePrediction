@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogService } from '../service/confirm-dialog.service';
+import { Router } from '@angular/router';
+import { MessageService } from '../service/message.service';
 
 interface Alert {
   type: string;
@@ -18,7 +20,10 @@ export class SuccessDialogComponent implements OnInit {
   message: string;
   alert : Alert;
 
-  constructor(private activeModal : NgbActiveModal, private confirmDialog: ConfirmDialogService ) { }
+  constructor(private activeModal : NgbActiveModal, 
+        private confirmDialog: ConfirmDialogService, 
+        private router: Router, 
+        private messageService: MessageService) { }
 
   ngOnInit() {
 
@@ -29,9 +34,17 @@ export class SuccessDialogComponent implements OnInit {
       } 
   }
 
+  sendMessage(questSessionStatus: string): void {
+    // send message to subscribers via observable subject
+    this.messageService.sendMessage(questSessionStatus);
+  }
+
   closePopup(){
     this.activeModal.close('Cross click');
     this.confirmDialog.clearMessage();
+    sessionStorage.setItem('questSessionInprogress', 'false');
+    this.sendMessage('saved');
+    this.router.navigateByUrl('/wcpredict/dashboard');
   }
 
 }

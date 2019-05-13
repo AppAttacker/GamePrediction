@@ -1,15 +1,35 @@
 <div class="card" style="border-radius: .5rem; background-color: rgb(196, 198, 202); height: calc(100vh - 123px);">
   <div style="padding-top: 10px;"><span class="div-left">
-      <h5 class="card-title">Match# Top 10 Winners</h5>
+      <h6 class="card-title"><strong>Match# {{matchId}} (Top 10 Winners)</strong></h6>
     </span>
     <span class="div-right">
-      <a href="#" (click)="updateMatchList()">
+      
+        <a class="btn btn-outline-secondary btn-sm" (click)="gotoDashboard()"
+        style="font-size: small;"><strong>Home</strong></a>
+      <!-- <a href="#" (click)="updateMatchList()">
         <img src="../../assets/refresh1.png" style="border-radius: 50%;">
-      </a>
+      </a> -->
     </span>
   </div>
   
   <div class="card-body bg-dark" style="border-radius: .5rem; height: calc(90vh - 123px);">
-      
+      <div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of matchDashboardArray">
+                <td>{{item.user.rank}}</td>
+                <td>{{item.user.firstName}}</td>
+                <td>{{item.points}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
   </div>
 </div>

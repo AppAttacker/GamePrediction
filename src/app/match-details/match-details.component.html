@@ -26,7 +26,9 @@
             (click)="triggerQuestSection()" role="button">{{remTimer}}</a>
         </div> -->
         <div>
-            <strong>Your score :</strong> {{userMatchDetails.points}}
+            <span class="div-left"><strong>Your score :</strong> {{userMatchDetails.points}}</span>
+            <span class="div-right"><a class="btn btn-secondary btn-sm" 
+                (click)="gotoMatchDashboard()" role="button">View Winners</a></span>
         </div>
       </div>
       <div *ngIf='menuType=="ongoing"' class="btn-sm" style=" font-size: small; color: white;">

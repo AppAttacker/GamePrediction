@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MatchService } from '../service/match.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatchDashboard } from '../modal/match-dashboard';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { Match } from '../modal/match';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-match-winner',
@@ -7,13 +13,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MatchWinnerComponent implements OnInit {
 
-  constructor() { }
+  matchDashboardArray: MatchDashboard[] = [];
+  matchId: number;
+
+  constructor(private router: Router, private matchService: MatchService, public route: ActivatedRoute, private modalService : NgbModal) {
+    this.matchId = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.getMatchDashboardData();
+  }
+
+  @Input()
+  matchDetails: Match;
 
   ngOnInit() {
   }
 
-  updateMatchList(){
-    alert("inside match winner page..");
+  getMatchDashboardData(){
+    const matchDashboardObserve = this.matchService.getMatchDashboard(this.matchId);
+    matchDashboardObserve.subscribe((matchData: MatchDashboard[]) => {
+      this.matchDashboardArray = matchData;
+      // matchData.forEach(element => {
+      //   if(element.noOfMatchPlayed>0){
+      //     this.matchDashboardArray.push(element);
+      //   }
+      // });
+    });
+  }
+
+  // updateMatchList(){
+  //     this.matchDashboardArray = [];
+  //     this.getMatchDashboardData()
+  // }
+
+  gotoDashboard() {
+   this.router.navigate(['/wcpredict/dashboard']);
   }
 
 }

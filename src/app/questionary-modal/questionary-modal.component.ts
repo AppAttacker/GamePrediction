@@ -118,15 +118,7 @@ export class QuestionaryModalComponent implements OnInit {
         console.log(error);
         this.successDialogService.setMessage('Something went wrong. Please try again after sometimes...', 'Warning');
         this.modalService.open(SuccessDialogComponent);
-      },
-      () => {
-        console.log('done');
-        this.activeModal.close();
-        sessionStorage.setItem('questSessionInprogress', 'false');
-        this.sendMessage('submitted');
-        this.router.navigateByUrl('/wcpredict/dashboard');
       }
-
     );
   }
 
@@ -158,13 +150,6 @@ export class QuestionaryModalComponent implements OnInit {
         console.log(error);
         this.successDialogService.setMessage('Something went wrong. Please try again after sometimes...', 'Warning');
         this.modalService.open(SuccessDialogComponent);
-      },
-      () => {
-        console.log('done');
-        this.activeModal.close();
-        sessionStorage.setItem('questSessionInprogress', 'false');
-        this.sendMessage('saved');
-        this.router.navigateByUrl('/wcpredict/dashboard');
       }
     );
   }

@@ -6,6 +6,8 @@ import { QuestionaryComponent } from './questionary/questionary.component';
 import { UserTemplateComponent } from './user-template/user-template.component';
 import { RegisterComponent } from './register/register.component';
 import { AnswerComponent } from './answer/answer.component';
+import { MatchDashboard } from './modal/match-dashboard';
+import { MatchWinnerComponent } from './match-winner/match-winner.component';
 
 const routes: Routes = [
   {path: 'wcpredict', component: LoginComponent},
@@ -14,7 +16,8 @@ const routes: Routes = [
   {path: 'wcpredict/dashboard', component: DashboardComponent, children: [
       {path: '', component: UserTemplateComponent},
       {path: 'predictionPage/:id', component: QuestionaryComponent},
-      {path: 'answerPage', component: AnswerComponent}
+      {path: 'answerPage', component: AnswerComponent},
+      {path: 'matchdashboard/:id', component: MatchWinnerComponent}
     ]}
 ];
 

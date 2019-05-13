@@ -6,6 +6,7 @@ import { UserPrediction } from '../modal/user-prediction';
 import { UserDashboard } from '../modal/user-dashboard';
 import { Match } from '../modal/match';
 import { User } from '../modal/user';
+import { MatchDashboard } from '../modal/match-dashboard';
 
 
 @Injectable({
@@ -30,7 +31,8 @@ export class MatchService {
   leaderBoardUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/leaderdashboard';
   matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchfixture';
   // matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchdetails';
-
+  
+  matchDashgboardUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchdashboard';
 
   // getMatchScheduleList(userId: number): Observable<MatchDetails> {
   //   // return this.http.get<IMatchDetails[]>(this.restURL);
@@ -77,6 +79,12 @@ export class MatchService {
   getLeaderboard() {
     console.log("inside getLeaderboard...");
     return this.http.get<User[]>(this.leaderBoardUrl);
+  }
+
+  getMatchDashboard(matchId: number) {
+    console.log("inside getMatchDashboard...");
+    const params = new HttpParams().set('matchId', matchId+"");
+    return this.http.get<MatchDashboard[]>(this.matchDashgboardUrl,{params});
   }
   
 }

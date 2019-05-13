@@ -119,4 +119,19 @@ export class MatchDetailsComponent implements OnInit {
     });
     modalref.componentInstance.matchId = this.matchDetails.matchid;
   }
+
+  gotoMatchDashboard(){
+    if (sessionStorage.getItem('questSessionInprogress') == 'true') {
+      this.modalService.open(ConfirmDialogComponent);
+      return false;
+    } else {
+      sessionStorage.setItem('questSessionInprogress', 'false');
+      this.sendMessage('closed');
+      this.router.navigate([ 'matchdashboard', this.matchDetails.matchid ], { relativeTo: this.route });
+    }
+  }
+  sendMessage(questSessionStatus: string): void {
+    // send message to subscribers via observable subject
+    this.messageService.sendMessage(questSessionStatus);
+  }
 }
