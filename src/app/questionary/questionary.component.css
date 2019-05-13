@@ -6,6 +6,8 @@
 .carousel-indicators li {
     width: 15px;
     height: 15px;
+    pointer-events:none; 
+    opacity:0.6;
 }
   .align-items-center {
     -ms-flex-align: center!important;

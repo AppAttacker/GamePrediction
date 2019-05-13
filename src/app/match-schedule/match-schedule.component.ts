@@ -35,7 +35,7 @@ export class MatchScheduleComponent implements OnInit {
   ngOnInit() {
     this.userType = sessionStorage.getItem('userType');
     this.getUserDashboardData();
-    this.getMatchList();
+    // this.getMatchList();
   }
 
   getMatchList() {
@@ -64,12 +64,16 @@ export class MatchScheduleComponent implements OnInit {
   getUserDashboardData() {
     const userDashboardObserve = this.matchService.getUserDashboard(sessionStorage.getItem("userid"));
     userDashboardObserve.subscribe((matchData: UserDashboard[]) => {
-      this.userMatchArray = matchData;
-      this.userMatchArray.forEach(userMatch => {
-        this.userPlayedMatchArray.push(userMatch.match.matchid);
+      // this.userMatchArray = matchData;
+      var userDashboard: UserDashboard;
+      matchData.forEach(userMatch => {
+        if(userMatch.status=="Completed"){
+          this.userPlayedMatchArray.push(userMatch.match.matchid);
+          this.userMatchArray.push(userMatch)
+        }
       });
-
-      });
+      this.getMatchList();
+    });
 
   }
 
@@ -82,6 +86,7 @@ export class MatchScheduleComponent implements OnInit {
       this.overallMatches = [];
       this.matchToBePlay = [];
       this.userMatchArray = [];
+      this.userPlayedMatchArray = [];
       this.getUserDashboardData();
       this.getMatchList();
     }

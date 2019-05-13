@@ -22,12 +22,32 @@ img{
 
     .labeltitle{
         font-size: small; 
-        color: rgb(188, 155, 219);
+        color: rgb(9, 152, 247);
     }
     .labeltxt{
         font-size: small; 
-        color: rgb(233, 222, 243);
+        color: rgb(192, 225, 247);
     }
     .teamnames{
-
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 15px;
+        font-weight: normal;
+        /* font-size: .80rem;
+        font-weight: 400;
+        line-height: 1; */
     }
+    .resulttitle{
+        font-size: small; 
+        color: rgb(120, 180, 9);
+    }
+    .resultmsg{
+        font-size: small; 
+        color: rgb(194, 245, 99);
+    }
+    /* hr {
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+        border: 0;
+        border-top: 1px solid rgba(0,0,0,.1);
+    } */
+    

@@ -26,6 +26,7 @@ import { WarningDialogComponent } from './warning-dialog/warning-dialog.componen
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HTTPListener, HTTPStatus } from './httpstatus';
 import { LoaderPageComponent } from './loader/loader-page/loader-page.component';
+import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 
 
 const RxJS_Services = [HTTPListener, HTTPStatus];
@@ -35,7 +36,8 @@ const RxJS_Services = [HTTPListener, HTTPStatus];
     QuestionaryModalComponent,
     ConfirmDialogComponent,
     NgbdModal1Content,
-    WarningDialogComponent
+    WarningDialogComponent,
+    SuccessDialogComponent
   ],
   declarations: [
     AppComponent,
@@ -55,7 +57,8 @@ const RxJS_Services = [HTTPListener, HTTPStatus];
     QuestionaryModalComponent,
     NgbdModal1Content,
     WarningDialogComponent,
-    LoaderPageComponent
+    LoaderPageComponent,
+    SuccessDialogComponent
   ],
   imports: [
     BrowserModule,

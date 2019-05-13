@@ -15,11 +15,11 @@
               <strong>Match# {{id}}</strong>
               <div class="d-flex justify-content-between">
                 <div>
-                  <img class="" src='../../assets/flags/{{match.fromTeam.code|lowercase}}.png'> {{match.fromTeam.name}} 
+                  <img class="" src='../../assets/flags/{{match.fromTeam.code|lowercase}}.png'>
                 </div>
                 <div class="text-middle"><br> Vs </div>
                 <div >
-                  <img class="" src='../../assets/flags/{{match.toTeam.code|lowercase}}.png'> {{match.toTeam.name}}
+                  <img class="" src='../../assets/flags/{{match.toTeam.code|lowercase}}.png'>
                 </div>
               </div>
             </div><hr>
@@ -59,11 +59,12 @@
                       </div>
                       <div *ngIf='question.question.category==3' style="text-align: center">
                         <!-- <input type="text" [(ngModel)]="question.answer" [name]='question.descript' /> -->
-                        <input name='"range"+question.question.questionId' type="range" min="0" max="500"
+                        <input name='"range"+question.question.questionId' type="range" min="0" max="500" default="question.answer"
                           [(ngModel)]="question.answer">
-                        <span style="padding-left: 20px;">
+                        <br><br>
+                        <span>
                           <input type="text" class="form-control-sm" [(ngModel)]="question.answer"
-                            [name]='"answer"+question.question.questionId' style="padding-left: 5px; width: 10%">
+                            [name]='"answer"+question.question.questionId' style="width: 30%">
                         </span>
                       </div>
                       <div *ngIf='question.question.category==2' style="text-align: center">
@@ -76,15 +77,19 @@
                       <div *ngIf='question.question.category==1' style="text-align: center">
                         <!-- <input type="radio" checked="checked" id='"answer"+question.questionId' name='"answer"+question.questionId'><label for='"answer"+question.questionId'>one</label>
                         <input type="radio" id='"answer"+question.questionId' name='"answer"+question.questionId'><label for='"answer"+question.questionId'>two</label> -->
-                        <div class="btn-group row">
+                        <div class="btn-group row" style="vertical-align: middle">
+                          <div class="col-sm-12">
                           <label class="btn btn-secondary">
                             <input type="radio" [name]='"answer"+question.question.questionId' id='"answer"+question.question.questionId+"from"' [value]='match.fromTeam.name' [(ngModel)]='question.answer' />
                             <span style="padding-left: 10px;">{{match.fromTeam.name}}</span>
                           </label>
-                          <label class="btn btn-secondary" style="padding-left: 20px;">
+                          </div>
+                          <div class="col-sm-12">
+                          <label class="btn btn-secondary">
                             <input type="radio" [name]='"answer"+question.question.questionId' id='"answer"+question.question.questionId+"to"' [value]='match.toTeam.name' [(ngModel)]='question.answer' />
                             <span style="padding-left: 10px;">{{match.toTeam.name}}</span>
                           </label>
+                          </div>
                         </div>
                       </div>
                     </div>

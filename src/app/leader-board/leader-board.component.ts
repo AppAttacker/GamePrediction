@@ -26,7 +26,11 @@ export class LeaderBoardComponent implements OnInit {
   getLeaderboardData(){
     const leaderboardObserve = this.matchService.getLeaderboard();
     leaderboardObserve.subscribe((userData: User[]) => {
-        this.userArray = userData;
+      userData.forEach(element => {
+        if(element.noOfMatchPlayed>0){
+          this.userArray.push(element);
+        }
+      });
     });
   }
 

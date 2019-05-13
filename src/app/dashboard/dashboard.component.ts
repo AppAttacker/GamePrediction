@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
     this.admin = sessionStorage.getItem('userType');
     this.rank = parseInt(sessionStorage.getItem('rank'));
     console.log('inside dashboard..');
+        
     if(this.username==null){
       this.router.navigateByUrl('/wcpredict');
     }

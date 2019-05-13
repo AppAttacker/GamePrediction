@@ -7,6 +7,8 @@ import { MatchQuestions } from '../modal/match-questions';
 import { UserPrediction } from '../modal/user-prediction';
 import { MatchService } from '../service/match.service';
 import { MatchDetails } from '../modal/match-details';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-answer',
@@ -36,7 +38,7 @@ export class AnswerComponent implements OnInit {
   selectedMatch: string;
   isSummaryVisible: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private matchService: MatchService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private matchService: MatchService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.username = sessionStorage.getItem('username');
@@ -59,15 +61,12 @@ export class AnswerComponent implements OnInit {
         this.playerArray = userPrediction.players;
         this.matchQuestionArray = userPrediction.matchQuestions;
         this.userPrediction.matchQuestions.forEach(element => {
-          if (element.question.category == 4 && element.answer != "") {
+          if (element.question.category == 4 && element.answer != "" && element.answer != null) {
             this.winMarginType = element.answer.split("_")[0];
             element.answer = element.answer.split("_")[1];
             
           }
-          // if (element.question.category == 2 && (element.answer)) {
-          //   let winMargin = element.answer.split("(")[1];
-          //   element.answer = winMargin[0];
-          // }
+          this.matchResult = this.match.matchResult;
         
           console.log(element);
           console.log(this.winMarginType);
@@ -87,17 +86,27 @@ export class AnswerComponent implements OnInit {
   onSubmit() {
     // TODO: Use EventEmitter with form value
     this.matchQuestionArray.forEach(element => {
-      if (element.question.category == 2 && (element.answer != null || element.answer != "")) {
+      if (element.question.category == 4 && element.answer != "") {
         element.answer = this.winMarginType + "_" + element.answer
       }
-
+      
       console.log(element);
       console.log(this.winMarginType);
     });
-    this.userPrediction.match.matchResult = this.matchResult;
     this.userPrediction.matchQuestions = this.matchQuestionArray;
-    
-    this.matchService.submitPredictionQuestByAdmin(this.userPrediction);
+    this.userPrediction.match.matchResult = this.matchResult;
+        
+    this.matchService.submitPredictionQuestByAdmin(this.userPrediction).subscribe(
+      data => {
+        if("SUCCESS"==data){
+          this.modalService.open(ConfirmDialogComponent);
+        }
+      },
+      error => {
+        console.log("Error");
+        console.log(error);
+      }
+    );
     this.router.navigateByUrl('/wcpredict/dashboard');
     // window.location.href = "/wcpredict/dashboard";
   }

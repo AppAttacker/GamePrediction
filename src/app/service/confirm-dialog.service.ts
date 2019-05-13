@@ -1,33 +1,28 @@
 import { Injectable } from '@angular/core';
 
+interface Alert {
+    type: string;
+    message: string;
+  }
+
 @Injectable({
   providedIn: 'root'
 })
 export class ConfirmDialogService {
 
-  private modals: any[] = [];
+    alert : Alert = {type : '', message : ''};
 
-    add(modal: any) {
-        // add modal to array of active modals
-        this.modals.push(modal);
+    setMessage(message, type){
+        this.alert.message = message;
+        this.alert.type = type;
     }
 
-    remove(id: string) {
-        // remove modal from array of active modals
-        this.modals = this.modals.filter(x => x.id !== id);
+    getMessage(){
+        return this.alert;
     }
-
-    open(id: string) {
-        // open modal specified by id
-        // let modal: any = this.modals.filter(x => x.id === id)[0];
-        console.log(this.modals);
-        // console.log(this.modals[0].exampleModalCenter);
-        this.modals[0].exampleModalCenter = 'show';
+    clearMessage(){
+        this.alert.message = "";
+        this.alert.type = "";
     }
-
-    close(id: string) {
-        // close modal specified by id
-        let modal: any = this.modals.filter(x => x.id === id)[0];
-        modal.close();
-    }
+  
 }

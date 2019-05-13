@@ -4,12 +4,9 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { UserPrediction } from '../modal/user-prediction';
 import { UserDashboard } from '../modal/user-dashboard';
-import { Leaderboard } from '../modal/leaderboard';
 import { Match } from '../modal/match';
-import { MatchQuestions } from '../modal/match-questions';
-import { error } from '@angular/compiler/src/util';
 import { User } from '../modal/user';
-import { MatchDetails } from '../modal/match-details';
+
 
 @Injectable({
   providedIn: 'root'
@@ -53,43 +50,22 @@ export class MatchService {
     return this.http.get<UserPrediction>(this.questionUrl, { params });
   }
 
-  savePredictionQuest(userPrediction: UserPrediction) {
+  savePredictionQuest(userPrediction: UserPrediction):Observable<any> {
     console.log("inside savePredictionQuest");
     console.log(userPrediction);
-    this.http.post(this.questionSaveUrl, userPrediction).subscribe(
-      data => {
-        console.log("POST Request is successful ", data);
-      },
-      error => {
-        console.log("Error", error);
-      }
-    );
+    return this.http.post(this.questionSaveUrl, userPrediction, {responseType: 'text'});
   }
 
-  submitPredictionQuestByUser(userPrediction: UserPrediction) {
+  submitPredictionQuestByUser(userPrediction: UserPrediction):Observable<any> {
     console.log("inside submitPredictionQuestByUser");
     console.log(userPrediction);
-    this.http.post(this.questionSubmitUrl, userPrediction).subscribe(
-      data => {
-        console.log("POST Request is successful ", data);
-      },
-      error => {
-        console.log("Error", error);
-      }
-    );
+    return this.http.post(this.questionSubmitUrl, userPrediction, {responseType: 'text'});
   }
 
-  submitPredictionQuestByAdmin(userPrediction: UserPrediction) {
+  submitPredictionQuestByAdmin(userPrediction: UserPrediction):Observable<any> {
     console.log("inside submitPredictionQuestByAdmin");
     console.log(userPrediction);
-    this.http.post(this.questionAdminSubmitUrl, userPrediction).subscribe(
-      data => {
-        console.log("POST Request is successful ", data);
-      },
-      error => {
-        console.log("Error", error);
-      }
-    );
+    return this.http.post(this.questionAdminSubmitUrl, userPrediction, {responseType: 'text'})
   }
 
   getUserDashboard(userid: string): Observable<UserDashboard[]> {

@@ -25,25 +25,28 @@
               <!-- <input type="text" [(ngModel)]="question.answer" [name]='question.descript' /> -->
               <span style="padding-right: 20px;">
                 <select class="browser-default custom-select" name="wintype" #winOption id="winOption"
-                  [(ngModel)]='winMarginType' (change)='question.answer=0' style="padding-left: 5px; width: 15%">
+                  [(ngModel)]='winMarginType' (change)='question.answer=0' style="padding-left: 5px; width: 80px">
                   <option value="R">Run</option>
                   <option value="W">Wicket</option>
                 </select>
               </span>
+              <!-- <input [name]='"range"+question.question.questionId' type="range" min="0" [max]='winOption.value=="R"?500:10' [(ngModel)]="question.answer"> -->
               <span style="padding-left: 20px;">
-                <input blockcopypaste numericOnly="true" type="text" class="form-control-sm" #inputVal [(ngModel)]="question.answer"
-                  name='"question"+question.matchPredictionId' style="padding-left: 5px; width: 20%">
+                <input type="text" ng-maxlength="2" blockcopypaste numericOnly="true" class="form-control-sm" #inputVal [(ngModel)]="question.answer"
+                  [name]='"question"+question.question.questionId' style="padding-left: 5px; width: 60px">
               </span>
             </div>
             <div *ngIf='question.question.category==3' style="text-align: center">
               <!-- <input type="text" [(ngModel)]="question.answer" [name]='question.descript' /> -->
+              <!-- <input name='"range"+question.question.questionId' type="range" min="0" max="500"
+                [(ngModel)]="question.answer"> -->
               <span style="padding-left: 20px;">
                 <input type="text" class="form-control-sm" [(ngModel)]="question.answer"
-                  name='"answer"+question.matchPredictionId' style="padding-left: 5px; width: 10%">
+                  [name]='"answer"+question.question.questionId' style="padding-left: 5px; width: 60px">
               </span>
             </div>
             <div *ngIf='question.question.category==2' style="text-align: center">
-              <input type="text" list="playerList" name='"playerOption"+question.matchPredictionId'
+              <input type="text" list="playerList" [name]='"playerOption"+question.question.questionId' placeholder="Select"
                 [(ngModel)]="question.answer" />
               <datalist class="ui-datalist-data" id="playerList">
                 <option *ngFor="let player of playerArray">{{player.fullName}}</option>
@@ -65,7 +68,7 @@
             </div>
           </div>
           <div *ngIf="isSummaryVisible" style="vertical-align: middle">
-            <label>Match Result<br> Summary :</label> <textarea rows="3" id="matchResult" style="width: 80%" [(ngModel)]='matchResult'></textarea>
+            <label>Match Result<br> Summary :</label> <textarea rows="3" name="matchResult" id="matchResult" style="width: 80%" [(ngModel)]='matchResult'></textarea>
           </div>
         </div>
       </div>

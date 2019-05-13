@@ -10,6 +10,8 @@ import { MatchQuestions } from '../modal/match-questions';
 import { UserPrediction } from '../modal/user-prediction';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from '../service/confirm-dialog.service';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 
 
 @Component({
@@ -43,7 +45,7 @@ export class QuestionaryModalComponent implements OnInit {
 
   @Input() matchId : number;
 
-  constructor(private modalService: NgbModal, private activeModal : NgbActiveModal, private router: Router, private route: ActivatedRoute, private messageService: MessageService, private matchService: MatchService) {}
+  constructor(private modalService: NgbModal, private activeModal : NgbActiveModal, private router: Router, private route: ActivatedRoute, private messageService: MessageService, private matchService: MatchService,private successDialogService : ConfirmDialogService) {}
 
   ngOnInit() {
     console.log('inside question component');
@@ -100,7 +102,24 @@ export class QuestionaryModalComponent implements OnInit {
     });
     this.userPrediction.matchQuestions = this.matchQuestionArray;
     
-    this.matchService.submitPredictionQuestByUser(this.userPrediction);
+    this.matchService.submitPredictionQuestByUser(this.userPrediction).subscribe(
+      data => {
+        if("SUCCESS"==data){
+          this.successDialogService.setMessage('You prediction successfully submitted...', 'Info');
+          this.modalService.open(SuccessDialogComponent);
+        }
+        if("FAILURE"==data){
+          this.successDialogService.setMessage('Failure to submit your prediction. Please try again after sometimes...', 'Info');
+          this.modalService.open(SuccessDialogComponent);
+        }
+      },
+      error => {
+        console.log("Error");
+        console.log(error);
+        this.successDialogService.setMessage('Something went wrong. Please try again after sometimes...', 'Warning');
+        this.modalService.open(SuccessDialogComponent);
+      }
+    );
     sessionStorage.setItem('questSessionInprogress', 'false');
     this.sendMessage('submitted');
     this.activeModal.close();
@@ -120,9 +139,27 @@ export class QuestionaryModalComponent implements OnInit {
     });
     this.userPrediction.matchQuestions = this.matchQuestionArray;
     
-    this.matchService.savePredictionQuest(this.userPrediction);
+    this.matchService.savePredictionQuest(this.userPrediction).subscribe(
+      data => {
+        if("SUCCESS"==data){
+          this.successDialogService.setMessage('Successfully Saved...', 'Info');
+          this.modalService.open(SuccessDialogComponent);
+        }
+        if("FAILURE"==data){
+          this.successDialogService.setMessage('Failure to save your prediction. Please try again after sometimes...', 'Info');
+          this.modalService.open(SuccessDialogComponent);
+        }
+      },
+      error => {
+        console.log("Error");
+        console.log(error);
+        this.successDialogService.setMessage('Something went wrong. Please try again after sometimes...', 'Warning');
+        this.modalService.open(SuccessDialogComponent);
+      }
+    );
+    this.activeModal.close();
     sessionStorage.setItem('questSessionInprogress', 'false');
-    this.sendMessage('submitted');
+    this.sendMessage('saved');
     this.router.navigateByUrl('/wcpredict/dashboard');
     // window.location.href = "/wcpredict/dashboard";
   }

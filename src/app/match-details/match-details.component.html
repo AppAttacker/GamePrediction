@@ -1,22 +1,23 @@
 <div *ngIf='(menuType=="completed" || menuType=="fixture" || (menuType=="ongoing" && seconds>-1))'class="card text-white bg-dark" style="text-align: center; margin-bottom: 10px">
-  <div class="card-body" style="padding-top: 8px; padding-left: 5px; padding-right: 5px;">
-    <div [className]="(remainDays < 3 && menuType=='ongoing')?'card-title div-left' : 'card-title'" style="font-size: small;">Match# {{matchDetails.matchid}}
+  <div class="card-body" style="padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
+    <div [className]="(remainDays < 3 && menuType=='ongoing')?'card-title div-left' : 'card-title'" style="color: rgb(200, 149, 248); font-size: 15px;"><strong>Match# {{matchDetails.matchid}}</strong>
     </div>
     <div class="div-right" *ngIf="(remainDays<3 && menuType=='ongoing')" style="font-size: x-small;">{{remTimer}}</div>
-    <div style="color: rgb(195, 139, 248)">
+    <div style="color: rgb(241, 135, 43)">
       <hr>
-      <div class="teamnames"><strong>
+      <div class="teamnames">
           {{matchDetails.fromTeam.name}}  <img class="" src='../../assets/flags/{{matchDetails.fromTeam.code|lowercase}}.png'>
         <span style="font-size: x-small"> Vs </span> <img class="" src='../../assets/flags/{{matchDetails.toTeam.code|lowercase}}.png'>
         {{matchDetails.toTeam.name}}
-      </strong></div>
+      </div>
       <hr>
-      <div *ngIf='menuType=="completed"' class="labeltitle" style="padding-top: 10px;"><strong>Date :</strong><span class="labeltxt">{{matchDetails.startTime | date: 'dd MMM yyyy'}}</span></div>
-      <div *ngIf='menuType=="ongoing" || menuType=="fixture"' class="labeltitle" style="padding-top: 10px;"><strong>Date :</strong> <span class="labeltxt">{{matchDetails.startTime | date: 'dd MMM yyyy hh:mm:ss a'}}</span></div>
+      <div *ngIf='menuType=="completed"' class="labeltitle" style="padding-top: 0px;"><strong>Date :</strong><span class="labeltxt">{{matchDetails.startTime | date: 'dd MMM yyyy'}}</span></div>
+      <div *ngIf='menuType=="ongoing" || menuType=="fixture"' class="labeltitle" style="padding-top: 0px;"><strong>Date :</strong> <span class="labeltxt" style="padding-left: 5px;">{{matchDetails.startTime | date: 'dd MMM yyyy'}}</span></div>
+      <div *ngIf='menuType=="ongoing" || menuType=="fixture"' class="labeltitle" style="padding-top: 5px;"><strong>Time :</strong> <span class="labeltxt" style="padding-left: 5px;">{{matchDetails.startTime | date: 'hh:mm:ss a'}} IST</span></div>
       
       <div *ngIf='menuType=="fixture"' class="labeltitle">
         <br>
-        <strong>Venue :</strong> <span class="labeltxt">{{matchDetails.venue}}</span>
+        <strong>Venue :</strong> <span class="labeltxt" style="padding-left: 0px;">{{matchDetails.venue}}</span>
       </div>
       <hr>
       <div *ngIf='menuType=="completed"' class="btn-sm" style=" font-size: small; color: white;">
@@ -49,7 +50,7 @@
             (click)="triggerQuestSection()" role="button">{{remTimer}}</a>
         </div> -->
         <div>
-          <label><strong>Result :</strong>{{(matchDetails.matchResult=="" || matchDetails.matchResult==null)?'Yet to play...':matchDetails.matchResult}}</label>
+          <label><span class="resulttitle"><strong>Result :</strong></span><span class="resultmsg">{{(matchDetails.matchResult=="" || matchDetails.matchResult==null)?'Yet to play...':matchDetails.matchResult}}</span></label>
           <!-- <a class="btn btn-primary btn-sm" [class.disabled]="message=='inprogress'" (click)="triggerMatchDetail()" role="button">Match Details</a> -->
         </div>
       </div>
