@@ -33,4 +33,8 @@ table thead {
   margin-left: 15px;
   margin-bottom: 15px;
 }
+
+tr:nth-child(even) { 
+            background-color: rgb(98, 100, 98); 
+        }
   

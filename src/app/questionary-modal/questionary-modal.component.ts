@@ -118,13 +118,16 @@ export class QuestionaryModalComponent implements OnInit {
         console.log(error);
         this.successDialogService.setMessage('Something went wrong. Please try again after sometimes...', 'Warning');
         this.modalService.open(SuccessDialogComponent);
+      },
+      () => {
+        console.log('done');
+        this.activeModal.close();
+        sessionStorage.setItem('questSessionInprogress', 'false');
+        this.sendMessage('submitted');
+        this.router.navigateByUrl('/wcpredict/dashboard');
       }
+
     );
-    sessionStorage.setItem('questSessionInprogress', 'false');
-    this.sendMessage('submitted');
-    this.activeModal.close();
-    this.router.navigateByUrl('/wcpredict/dashboard');
-    // window.location.href = "/wcpredict/dashboard";
   }
 
   onSave() {
@@ -155,13 +158,15 @@ export class QuestionaryModalComponent implements OnInit {
         console.log(error);
         this.successDialogService.setMessage('Something went wrong. Please try again after sometimes...', 'Warning');
         this.modalService.open(SuccessDialogComponent);
+      },
+      () => {
+        console.log('done');
+        this.activeModal.close();
+        sessionStorage.setItem('questSessionInprogress', 'false');
+        this.sendMessage('saved');
+        this.router.navigateByUrl('/wcpredict/dashboard');
       }
     );
-    this.activeModal.close();
-    sessionStorage.setItem('questSessionInprogress', 'false');
-    this.sendMessage('saved');
-    this.router.navigateByUrl('/wcpredict/dashboard');
-    // window.location.href = "/wcpredict/dashboard";
   }
 
   gotoDashboard() {

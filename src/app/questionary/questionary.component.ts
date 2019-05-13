@@ -122,13 +122,14 @@ export class QuestionaryComponent implements OnInit {
         console.log(error);
         this.successDialogService.setMessage('Something went wrong. Please try again after sometimes...', 'Warning');
         this.modalService.open(SuccessDialogComponent);
+      },
+      () => {
+        console.log('done');
+        sessionStorage.setItem('questSessionInprogress', 'false');
+        this.sendMessage('submitted');
+        this.router.navigateByUrl('/wcpredict/dashboard');
       }
     );
-    
-    sessionStorage.setItem('questSessionInprogress', 'false');
-    this.sendMessage('submitted');
-    this.router.navigateByUrl('/wcpredict/dashboard');
-    // window.location.href = "/wcpredict/dashboard";
   }
 
   onSave() {
@@ -159,12 +160,15 @@ export class QuestionaryComponent implements OnInit {
         console.log(error);
         this.successDialogService.setMessage('Something went wrong. Please try again after sometimes...', 'Warning');
         this.modalService.open(SuccessDialogComponent);
+      },
+      () => {
+        console.log('done');
+        sessionStorage.setItem('questSessionInprogress', 'false');
+        this.sendMessage('submitted');
+        this.router.navigateByUrl('/wcpredict/dashboard');
       }
     );
     
-    sessionStorage.setItem('questSessionInprogress', 'false');
-    this.sendMessage('saved');
-    this.router.navigateByUrl('/wcpredict/dashboard');
     // window.location.reload();
     // window.location.href = "/wcpredict/dashboard";
   }

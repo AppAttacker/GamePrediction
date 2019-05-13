@@ -27,6 +27,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HTTPListener, HTTPStatus } from './httpstatus';
 import { LoaderPageComponent } from './loader/loader-page/loader-page.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { MatchWinnerComponent } from './match-winner/match-winner.component';
 
 
 const RxJS_Services = [HTTPListener, HTTPStatus];
@@ -58,7 +59,8 @@ const RxJS_Services = [HTTPListener, HTTPStatus];
     NgbdModal1Content,
     WarningDialogComponent,
     LoaderPageComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    MatchWinnerComponent
   ],
   imports: [
     BrowserModule,
