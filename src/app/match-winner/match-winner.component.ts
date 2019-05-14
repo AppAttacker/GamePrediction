@@ -17,14 +17,17 @@ export class MatchWinnerComponent implements OnInit {
   matchId: number;
 
   constructor(private router: Router, private matchService: MatchService, public route: ActivatedRoute, private modalService : NgbModal) {
-    this.matchId = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.getMatchDashboardData();
+    
   }
 
   @Input()
   matchDetails: Match;
 
   ngOnInit() {
+    this.route.params.subscribe(routeParams => {
+      this.matchId = routeParams.id;
+      this.getMatchDashboardData();
+    });    
   }
 
   getMatchDashboardData(){
