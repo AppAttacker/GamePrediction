@@ -79,7 +79,7 @@ export class AnswerComponent implements OnInit {
   getMatchList(){
     return this.matchService.getMatchScheduleList(this.userId).subscribe(
         // matchObj => this.matchList = matchObj
-        matchObj => this.matchScheduleArray = matchObj
+        matchObj => this.matchDetails = matchObj
     );
   }
 

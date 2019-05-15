@@ -4,6 +4,7 @@ import { ConfirmDialogService } from '../service/confirm-dialog.service';
 import { Router } from '@angular/router';
 import { MessageService } from '../service/message.service';
 import { MatchScheduleComponent } from '../match-schedule/match-schedule.component';
+import { UserTemplateComponent } from '../user-template/user-template.component';
 
 interface Alert {
   type: string;
@@ -22,6 +23,7 @@ export class SuccessDialogComponent implements OnInit {
   alert : Alert;
 
   @Input() scheduleComp : MatchScheduleComponent;
+  @Input() userDashboardComp : UserTemplateComponent;
 
   constructor(private activeModal : NgbActiveModal, 
         private confirmDialog: ConfirmDialogService, 
@@ -47,10 +49,11 @@ export class SuccessDialogComponent implements OnInit {
     // this.activeModal.close('Cross click');
     this.modalService.dismissAll();
     this.confirmDialog.clearMessage();
-    sessionStorage.setItem('questSessionInprogress', 'false');
+    // sessionStorage.setItem('questSessionInprogress', 'false');
     this.sendMessage('saved');
     this.router.navigateByUrl('/wcpredict/dashboard');
     this.scheduleComp.ngOnInit();
+    this.userDashboardComp.ngOnInit();
   }
 
 }

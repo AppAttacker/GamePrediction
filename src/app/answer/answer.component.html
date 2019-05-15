@@ -9,7 +9,7 @@
             <label>Select match to give final answer : </label>
             <input type="search" list="matchid" [(ngModel)]='selectedMatch' name="matchlist" placeholder="Select Match"/>
             <datalist id="matchid">
-              <option *ngFor="let match of matchScheduleArray">Match {{match.matchid}} - {{match.fromTeam.name}} Vs {{match.toTeam.name}}</option>
+              <option *ngFor="let match of matchDetails.overallMatches">Match {{match.matchid}} - {{match.fromTeam.name}} Vs {{match.toTeam.name}}</option>
             </datalist>
             <a class="btn btn-primary btn-sm" (click)="loadQuestions()" role="button">Go</a>
             

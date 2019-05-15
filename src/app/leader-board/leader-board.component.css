@@ -17,7 +17,7 @@
 table thead {
     display: block;
       
-    text-align: center;
+    /* text-align: center; */
     color: rgb(51, 120, 224);
   }
 .table th {

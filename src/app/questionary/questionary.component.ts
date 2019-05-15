@@ -125,6 +125,7 @@ export class QuestionaryComponent implements OnInit {
         this.modalService.open(SuccessDialogComponent);
       }
     );
+    sessionStorage.setItem('questSessionInprogress', 'false');
   }
 
   onSave() {
@@ -157,7 +158,7 @@ export class QuestionaryComponent implements OnInit {
         this.modalService.open(SuccessDialogComponent);
       }
     );
-    
+    sessionStorage.setItem('questSessionInprogress', 'false');
     // window.location.reload();
     // window.location.href = "/wcpredict/dashboard";
   }

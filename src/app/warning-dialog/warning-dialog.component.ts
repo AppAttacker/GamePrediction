@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from '../service/message.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { MessageService } from '../service/message.service';
 })
 export class WarningDialogComponent implements OnInit {
 
-  constructor(private activeModal : NgbActiveModal, private messageService: MessageService, private router: Router) { }
+  constructor(public route: ActivatedRoute, private activeModal : NgbActiveModal, private messageService: MessageService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,5 +26,4 @@ export class WarningDialogComponent implements OnInit {
     // send message to subscribers via observable subject
     this.messageService.sendMessage(questSessionStatus);
   }
-
 }

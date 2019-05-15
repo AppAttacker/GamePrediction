@@ -15,7 +15,7 @@ export class UserTemplateComponent implements OnInit {
 
   userDashboardArray: UserDashboard[] = []; 
   userDashoard: UserDashboard; 
-  totMatchPlayed: number;
+  totMatchPlayed: number = 0;
   totScore: number = 0;
   rank: number;
   chartDataArray: ChartData[] = [];
@@ -59,12 +59,15 @@ export class UserTemplateComponent implements OnInit {
     const userDashboardObserve = this.matchService.getUserDashboard(sessionStorage.getItem("userid"));
     userDashboardObserve.subscribe((matchData: UserDashboard[]) => {
         for (var i = 0; i < matchData.length; i++) {
-          this.chartData = { "y": matchData[i].points, "label": "Match: "+matchData[i].match.matchid }
-          this.chartDataArray.push(this.chartData);
-          this.totScore = this.totScore + matchData[i].points;
+          if(matchData[i].status=="Completed"){
+            this.chartData = { "y": matchData[i].points, "label": "Match: "+matchData[i].match.matchid }
+            this.chartDataArray.push(this.chartData);
+            this.totScore = this.totScore + matchData[i].points;
+            this.totMatchPlayed++;
+          }
         }
         this.userDashboardArray = matchData;
-        this.totMatchPlayed = matchData.length;
+        // this.totMatchPlayed = matchData.length;
         
     });
     

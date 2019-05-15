@@ -25,12 +25,22 @@
           <a class="btn btn-success btn-sm" [class.disabled]="remainDays>2 ? true: false"
             (click)="triggerQuestSection()" role="button">{{remTimer}}</a>
         </div> -->
-        <div *ngIf="(matchDetails.matchResult)">
-            <span class="div-left pt-1"><strong>Your <br>Score :</strong> {{userMatchDetails.points}}</span>
+        <div *ngIf="userMatchDetails.status=='NP'">
+            <span class="div-left pt-1"><strong>Not <br> Participated</strong></span>
             <span class="div-right pb-2"><a class="btn btn-secondary btn-sm" 
                 (click)="gotoMatchDashboard()" role="button">View Winners</a></span>
         </div>
-        <div *ngIf="!(matchDetails.matchResult)">
+        <div *ngIf="userMatchDetails.status=='Saved'">
+          <span class="div-left pt-1"><strong>Not <br> Completed</strong></span>
+          <span class="div-right pb-2"><a class="btn btn-secondary btn-sm" 
+              (click)="gotoMatchDashboard()" role="button">View Winners</a></span>
+        </div>
+        <div *ngIf="(matchDetails.matchResult) && userMatchDetails.status=='Completed'">
+          <span class="div-left pt-1"><strong>Your <br>Score :</strong> {{userMatchDetails.points}}</span>
+          <span class="div-right pb-2"><a class="btn btn-secondary btn-sm" 
+              (click)="gotoMatchDashboard()" role="button">View Winners</a></span>
+        </div>
+        <div *ngIf="!(matchDetails.matchResult) && userMatchDetails.status=='Completed'">
           <span style="text-align: center"><strong>Result Not yet Announced</strong></span>          
         </div>
       </div>

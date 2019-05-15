@@ -2,26 +2,26 @@
   
   <div class="card" style="border: none; border-radius: .5rem; height: calc(100vh - 123px); background-color: rgb(196, 198, 202);">
       <h5 class="card-title" style="padding-top:10px;">Your current status</h5>
-    <div class="card-body bg-dark text-white" style="margin-bottom: 13px; border-radius: .5rem;">
+    <div class="card-body bg-dark text-white" style="margin-bottom: 13px; border-radius: .5rem; border-bottom: 2px">
       <!-- <h5 class="card-title">Your current status</h5> -->
       <div style="align-content: center">
-        <div class="userInfo" id="chartContainer" style="height: calc(50vh - 123px); width: 100%;"></div>
+        <div class="userInfo" id="chartContainer" style="margin-bottom: 30px; height: calc(65vh - 123px); width: 100%;"></div>
       </div>
       <div class="col" style="padding-top: 2%; width: 100%;">
-        <table class="table table-borderless">
+        <table class="table" style="border-top: 0px;border-bottom: 2px;">
           <tbody>
             <tr>
-              <td>Participated Match(include saved status*):</td>
+              <td>Participated Match *:</td>
               <td>{{totMatchPlayed}}</td>
             </tr>
             <tr>
               <td>Overall Score:</td>
               <td>{{totScore}}</td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td>Your Rank:</td>
               <td>{{rank==0? '-' : rank}}</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>

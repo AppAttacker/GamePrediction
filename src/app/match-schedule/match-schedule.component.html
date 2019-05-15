@@ -22,16 +22,15 @@
   <!-- Tab panes -->
   <div class="tab-content" style="margin-top: 5px; ">
     <div id="played" class="container tab-pane scrollapply">
-      <div *ngIf="userMatchArray && userMatchArray.length > 0; else emptyPage"></div>
-      <div #matchPage *ngFor="let userMatch of userMatchArray">
+      <div *ngIf="matchDetails.userMatches && matchDetails.userMatches.length > 0; else emptyPage"></div>
+      <div #matchPage *ngFor="let userMatch of matchDetails.userMatches">
         <app-match-details menuType='completed' [userMatchDetails]="userMatch"></app-match-details>
-
       </div>
     </div>
     <div #upcoming id="upcoming" [class]="userType!='admin'?'container tab-pane active scrollapply':'container tab-pane scrollapply'">
-      <div *ngIf="matchToBePlay && matchToBePlay.length > 0; else emptyPage"></div>
-      <div #matchPage *ngFor="let match of matchToBePlay">
-        <app-match-details menuType='ongoing' [matchDetails]="match"></app-match-details>
+      <div *ngIf="matchDetails.ongoingMatches && matchDetails.ongoingMatches.length > 0; else emptyPage"></div>
+      <div #matchPage *ngFor="let match of matchDetails.ongoingMatches; index as index">
+        <app-match-details *ngIf="index < 7" menuType='ongoing' [matchDetails]="match"></app-match-details>
       </div>
     </div>
     
@@ -43,8 +42,8 @@
           
          
     <div #fixture id="fixture" [class]="userType=='admin'?'container tab-pane active scrollapply':'container tab-pane scrollapply'">
-      <div *ngIf="overallMatches && overallMatches.length > 0; else emptyPage"></div>
-      <div #matchPage *ngFor="let match of overallMatches | filterFixtureByTeam: filterteamName">
+      <div *ngIf="matchDetails.overallMatches && matchDetails.overallMatches.length > 0; else emptyPage"></div>
+      <div #matchPage *ngFor="let match of matchDetails.overallMatches | filterFixtureByTeam: filterteamName">
         <app-match-details menuType='fixture' [matchDetails]="match"></app-match-details>
       </div>
 

@@ -4,9 +4,9 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { UserPrediction } from '../modal/user-prediction';
 import { UserDashboard } from '../modal/user-dashboard';
-import { Match } from '../modal/match';
 import { User } from '../modal/user';
 import { MatchDashboard } from '../modal/match-dashboard';
+import { MatchDetails } from '../modal/match-details';
 
 
 @Injectable({
@@ -29,22 +29,22 @@ export class MatchService {
 
   userDashgboardUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/userdashboard';
   leaderBoardUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/leaderdashboard';
-  matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchfixture';
-  // matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchdetails';
+  // matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchfixture';
+  matchScheduleUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchdetails';
   
   matchDashgboardUrl: string = 'http://'+this.hostURL+':8084/gameprediction/api/matchdashboard';
 
-  // getMatchScheduleList(userId: number): Observable<MatchDetails> {
-  //   // return this.http.get<IMatchDetails[]>(this.restURL);
-  //   const params = new HttpParams().set('userId', userId+"");
-  //   return this.http.get<MatchDetails>(this.matchScheduleUrl,{params});
-  // }
-
-  getMatchScheduleList(userId: number): Observable<Match[]> {
+  getMatchScheduleList(userId: number): Observable<MatchDetails> {
     // return this.http.get<IMatchDetails[]>(this.restURL);
     const params = new HttpParams().set('userId', userId+"");
-    return this.http.get<Match[]>(this.matchScheduleUrl,{params});
+    return this.http.get<MatchDetails>(this.matchScheduleUrl,{params});
   }
+
+  // getMatchScheduleList(userId: number): Observable<Match[]> {
+  //   // return this.http.get<IMatchDetails[]>(this.restURL);
+  //   const params = new HttpParams().set('userId', userId+"");
+  //   return this.http.get<Match[]>(this.matchScheduleUrl,{params});
+  // }
 
   getPredictionQuest(userId: number, matchId: number): Observable<UserPrediction> {
     //?matchId=1&userId=1

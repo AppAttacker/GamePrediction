@@ -120,6 +120,7 @@ export class QuestionaryModalComponent implements OnInit {
         this.modalService.open(SuccessDialogComponent);
       }
     );
+    sessionStorage.setItem('questSessionInprogress', 'false');
   }
 
   onSave() {
@@ -152,6 +153,7 @@ export class QuestionaryModalComponent implements OnInit {
         this.modalService.open(SuccessDialogComponent);
       }
     );
+    sessionStorage.setItem('questSessionInprogress', 'false');
   }
 
   gotoDashboard() {

@@ -1,95 +1,99 @@
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Start Prediction ....</h4>   
-    <button type="button" class="close" aria-label="Close" (click)="(questionForm.dirty)?valueChangeAlert():closeSession();">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form (ngSubmit)="onSubmit()" #questionForm="ngForm">
-      <div class="card" style="border-radius: .5rem; background-color: rgb(196, 198, 202);">
-        <div class="card-body">    
-          <div id="demo" class="carousel slide bg-dark"
-            style="height: calc(81.5vh - 123px); color: rgb(240, 238, 167); text-align: center; border-radius: .5rem;"
-            data-ride="carousel" data-interval="false">
-            <div style="padding-top: 10px; padding-left: 50px; padding-right: 50px; color: rgb(166, 214, 247); font-size: medium">
-              <strong>Match# {{id}}</strong>
-              <div class="d-flex justify-content-between">
-                <div>
-                  <img class="" src='../../assets/flags/{{match.fromTeam.code|lowercase}}.png'>
-                </div>
-                <div class="text-middle"><br> Vs </div>
-                <div >
-                  <img class="" src='../../assets/flags/{{match.toTeam.code|lowercase}}.png'>
-                </div>
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Start Prediction ....</h4>
+  <button type="button" class="close" aria-label="Close"
+    (click)="(questionForm.dirty)?valueChangeAlert():closeSession();">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form (ngSubmit)="onSubmit()" #questionForm="ngForm">
+    <div class="card" style="border-radius: .5rem; background-color: rgb(196, 198, 202);">
+      <div class="card-body">
+        <div id="demo" class="carousel slide bg-dark"
+          style="height: calc(81.5vh - 123px); color: rgb(240, 238, 167); text-align: center; border-radius: .5rem;"
+          data-ride="carousel" data-interval="false">
+          <div
+            style="padding-top: 10px; padding-left: 50px; padding-right: 50px; color: rgb(166, 214, 247); font-size: medium">
+            <strong>Match# {{id}}</strong>
+            <div class="d-flex justify-content-between">
+              <div>
+                <img class="" src='../../assets/flags/{{match.fromTeam.code|lowercase}}.png'>
               </div>
-            </div><hr>
-            <!-- Indicators -->
-            <ul class="carousel-indicators">
-              <li *ngFor="let question of matchQuestionArray;  first as isFirst; index as i;"
-                [className]="isFirst ? 'active' : ''" data-target="#demo" data-slide-to="i"></li>
-            </ul>
-    
-            <!-- The slideshow -->
-            <div class="container-fluid" style="margin-top: 10%">
-              <div class="row">
-                <div class="col-lg-12 col-sm-12">
-                  <div class="carousel-inner">
-                    <div *ngFor="let question of matchQuestionArray; first as isFirst; last as isLast; index as i;"
-                      [className]="isFirst ? 'carousel-item active' : 'carousel-item'">
-                      <!-- <img src="../../assets/images2.jpg" alt="Los Angeles"> -->
-    
-                      <h6><label>{{i+1}}. {{question.question.description}}</label></h6><br><br>
-                      <div *ngIf='question.question.category==4' style="text-align: center">
-                        <!-- <input type="text" [(ngModel)]="question.answer" [name]='question.descript' /> -->
-                        <div style="text-align: center">
-                          <select class="browser-default custom-select" name="wintype" #winOption id="winOption"
-                            [(ngModel)]='winMarginType' (change)='question.answer=0' style="padding-left: 5px; width: 100px">
-                            <option value="R">Run</option>
-                            <option value="W">Wicket</option>
-                          </select>
-                        </div>
-                        <br/>
-                        <div style="text-align: center">
-                          <input [name]='"range"+question.question.questionId' type="range" min="0" [max]='winOption.value=="R"?500:10' [(ngModel)]="question.answer">
-                          <span style="padding-left: 20px;">
-                            <input type="text" ng-maxlength="2" blockcopypaste numericOnly="true" class="form-control-sm" #inputVal [(ngModel)]="question.answer"
-                              [name]='"question"+question.question.questionId' style="padding-left: 5px; width: 60px">
-                          </span>
-                        </div>
+              <div class="text-middle"><br> Vs </div>
+              <div>
+                <img class="" src='../../assets/flags/{{match.toTeam.code|lowercase}}.png'>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <!-- Indicators -->
+          <ul class="carousel-indicators">
+            <li *ngFor="let question of matchQuestionArray;  first as isFirst; index as i;"
+              [className]="isFirst ? 'active' : ''" data-target="#demo" data-slide-to="i"></li>
+          </ul>
+
+          <!-- The slideshow -->
+          <div class="container-fluid" style="margin-top: 10%;">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12">
+                <div class="carousel-inner">
+                  <div *ngFor="let question of matchQuestionArray; first as isFirst; last as isLast; index as i;"
+                    [className]="isFirst ? 'carousel-item active' : 'carousel-item'">
+
+                    <h6><label>{{i+1}}. {{question.question.description}}</label></h6><br><br>
+                    <div *ngIf='question.question.category==4' style="text-align: center">
+                      <div style="text-align: center">
+                        <select class="browser-default custom-select" name="wintype" #winOption id="winOption"
+                          [(ngModel)]='winMarginType' (change)='question.answer=0'
+                          style="padding-left: 5px; width: 100px">
+                          <option value="R">Run</option>
+                          <option value="W">Wicket</option>
+                        </select>
                       </div>
-                      <div *ngIf='question.question.category==3' style="text-align: center">
-                        <!-- <input type="text" [(ngModel)]="question.answer" [name]='question.descript' /> -->
-                        <input name='"range"+question.question.questionId' type="range" min="0" max="500" default="question.answer"
-                          [(ngModel)]="question.answer">
-                        <br><br>
-                        <span>
-                          <input type="text" class="form-control-sm" [(ngModel)]="question.answer"
-                            [name]='"answer"+question.question.questionId' style="width: 30%">
+                      <br />
+                      <div style="text-align: center">
+                        <input [name]='"range"+question.question.questionId' type="range" min="0"
+                          [max]='winOption.value=="R"?500:10' [(ngModel)]="question.answer">
+                        <span style="padding-left: 20px;">
+                          <input type="text" ng-maxlength="2" blockcopypaste numericOnly="true" class="form-control-sm"
+                            #inputVal [(ngModel)]="question.answer" [name]='"question"+question.question.questionId'
+                            style="padding-left: 5px; width: 60px">
                         </span>
                       </div>
-                      <div *ngIf='question.question.category==2' style="text-align: center">
-                        <input type="text" list="playerList" [name]='"playerOption"+question.question.questionId'
-                          [(ngModel)]="question.answer" />
-                        <datalist class="ui-datalist-data" id="playerList">
-                          <option *ngFor="let player of playerArray">{{player.fullName}}</option>
-                        </datalist>
-                      </div>
-                      <div *ngIf='question.question.category==1' style="text-align: center">
-                        <!-- <input type="radio" checked="checked" id='"answer"+question.questionId' name='"answer"+question.questionId'><label for='"answer"+question.questionId'>one</label>
-                        <input type="radio" id='"answer"+question.questionId' name='"answer"+question.questionId'><label for='"answer"+question.questionId'>two</label> -->
-                        <div class="btn-group row" style="vertical-align: middle">
-                          <div class="col-sm-12">
+                    </div>
+                    <div *ngIf='question.question.category==3' style="text-align: center">
+                      <input name='"range"+question.question.questionId' type="range" min="0" max="500"
+                        default="question.answer" [(ngModel)]="question.answer">
+                      <br><br>
+                      <span>
+                        <input type="text" class="form-control-sm" [(ngModel)]="question.answer"
+                          [name]='"answer"+question.question.questionId' style="width: 30%">
+                      </span>
+                    </div>
+                    <div *ngIf='question.question.category==2' style="text-align: center">
+                      <input type="text" list="playerList" [name]='"playerOption"+question.question.questionId'
+                        [(ngModel)]="question.answer" />
+                      <datalist class="ui-datalist-data" id="playerList">
+                        <option *ngFor="let player of playerArray">{{player.fullName}}</option>
+                      </datalist>
+                    </div>
+                    <div *ngIf='question.question.category==1' style="text-align: center">
+                      <div class="btn-group row" style="vertical-align: middle">
+                        <div class="col-sm-12">
                           <label class="btn btn-secondary">
-                            <input type="radio" [name]='"answer"+question.question.questionId' id='"answer"+question.question.questionId+"from"' [value]='match.fromTeam.name' [(ngModel)]='question.answer' />
+                            <input type="radio" [name]='"answer"+question.question.questionId'
+                              id='"answer"+question.question.questionId+"from"' [value]='match.fromTeam.name'
+                              [(ngModel)]='question.answer' />
                             <span style="padding-left: 10px;">{{match.fromTeam.name}}</span>
                           </label>
-                          </div>
-                          <div class="col-sm-12">
+                        </div>
+                        <div class="col-sm-12">
                           <label class="btn btn-secondary">
-                            <input type="radio" [name]='"answer"+question.question.questionId' id='"answer"+question.question.questionId+"to"' [value]='match.toTeam.name' [(ngModel)]='question.answer' />
+                            <input type="radio" [name]='"answer"+question.question.questionId'
+                              id='"answer"+question.question.questionId+"to"' [value]='match.toTeam.name'
+                              [(ngModel)]='question.answer' />
                             <span style="padding-left: 10px;">{{match.toTeam.name}}</span>
                           </label>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -97,24 +101,26 @@
                 </div>
               </div>
             </div>
-    
-            <!-- Left and right controls -->
-            <a class="carousel-control-prev" href="#demo" data-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a class="carousel-control-next" href="#demo" data-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </a>
-    
-          </div>          
+          </div>
+
+          <!-- Left and right controls -->
+          <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
+
         </div>
       </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-pill btn-warning btn-sm" (click)="(questionForm.dirty)?valueChangeAlert():closeSession();">Close</button>
-    <button type="submit" [disabled]="!questionForm.dirty" class="btn btn-pill btn-primary btn-sm"
-      (click)="onSave()">Save changes</button>
-    <button type="submit" [disabled]="!questionForm.dirty" class="btn btn-pill btn-success btn-sm">Submit
-      changes</button>
-  </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-pill btn-warning btn-sm"
+    (click)="(questionForm.dirty)?valueChangeAlert():closeSession();">Close</button>
+  <button type="submit" [disabled]="!questionForm.dirty" class="btn btn-pill btn-primary btn-sm" (click)="onSave()">Save
+    changes</button>
+  <button type="submit" [disabled]="!questionForm.dirty" class="btn btn-pill btn-success btn-sm">Submit
+    changes</button>
+</div>

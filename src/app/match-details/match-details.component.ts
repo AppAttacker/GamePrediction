@@ -21,7 +21,7 @@ import { MatchDetails } from '../modal/match-details';
 export class MatchDetailsComponent implements OnInit {
   
   secondsCounter: any;
-  today: number = Date.now();
+  today: Date;
   todate: number = Date.parse("2019-05-30T09:30:00.000+0000");
   distance: number;
   remTimer: string;
@@ -39,10 +39,7 @@ export class MatchDetailsComponent implements OnInit {
               public route: ActivatedRoute, 
               private messageService: MessageService,
               private confirmDialogService: ConfirmDialogService, 
-              private modalService : NgbModal) {
-      this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message.text; });
-      this.message = sessionStorage.getItem('questSessionInprogress');
-   }
+              private modalService : NgbModal) { }
 
   // @Input()
   // matchDetails: IMatchDetails;
@@ -57,16 +54,17 @@ export class MatchDetailsComponent implements OnInit {
   menuType: string;
 
   ngOnInit() {
+    this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message.text; });
+    this.message = sessionStorage.getItem('questSessionInprogress');
     // this.distance = this.todate - this.today;
     this.userType = sessionStorage.getItem('userType');
     this.secondsCounter = setInterval(() => { 
       this.getDateCountDown(); 
       }, 1000);
-      this.userScore = parseInt(sessionStorage.getItem('userScore'));
-      if(this.menuType=='completed'){
-        this.matchDetails = this.userMatchDetails.match;
-      }
-    
+    this.userScore = parseInt(sessionStorage.getItem('userScore'));
+    if(this.menuType=='completed'){
+      this.matchDetails = this.userMatchDetails.match;
+    }
   }
   
   ngOnDestroy() {
@@ -100,8 +98,9 @@ export class MatchDetailsComponent implements OnInit {
 
   getDateCountDown(){
     this.todate = Date.parse(this.matchDetails.startTime);
-    this.today = Date.now();
-    this.distance = this.todate - this.today;
+    this.today = new Date();
+    this.today.setHours(this.today.getHours()+2);
+    this.distance = ((this.todate - this.today.getTime()));
     var days = Math.floor(this.distance / (1000 * 60 * 60 * 24));
     var hours = Math.floor((this.distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((this.distance % (1000 * 60 * 60)) / (1000 * 60));
